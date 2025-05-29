@@ -47,13 +47,13 @@ document.addEventListener('DOMContentLoaded', () => {
             document.title = 'QuickTools Hub - Your One-Stop Utility Platform';
         } else {
             // Show specific tool
-            const targetView = document.getElementById(viewId);
-            if (targetView) {
+        const targetView = document.getElementById(viewId);
+        if (targetView) {
                 toolViewContainer.style.display = 'block';
-                targetView.classList.add('active');
-                const tool = tools.find(t => t.id === viewId);
-                document.title = `${tool?.name || 'Tool'} | QuickTools Hub`;
-                window.scrollTo(0, 0);
+            targetView.classList.add('active');
+            const tool = tools.find(t => t.id === viewId);
+            document.title = `${tool?.name || 'Tool'} | QuickTools Hub`;
+            window.scrollTo(0, 0);
             }
         }
 
