@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contact QuickTools Hub - Get in touch with us for support, feedback, or inquiries">
+    <title>Contact Us - QuickTools Hub</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛠️</text></svg>">
+</head>
+<body>
+    <header id="main-header">
+        <!-- Header content will be dynamically loaded -->
+    </header>
+
+    <main>
+        <section class="page-content">
+            <div class="container">
+                <h1>Contact Us</h1>
+                
+                <div class="contact-grid">
+                    <div class="contact-info">
+                        <h2>Get in Touch</h2>
+                        <p>We'd love to hear from you! Please feel free to reach out using any of the following methods:</p>
+                        
+                        <div class="contact-methods">
+                            <div class="contact-method">
+                                <h3>📧 Email</h3>
+                                <p><a href="mailto:support@quicktoolshub.com">support@quicktoolshub.com</a></p>
+                            </div>
+                            
+                            <div class="contact-method">
+                                <h3>💬 Social Media</h3>
+                                <p>Follow us on:</p>
+                                <ul class="social-links">
+                                    <li><a href="https://twitter.com/quicktoolshub">Twitter</a></li>
+                                    <li><a href="https://github.com/quicktoolshub">GitHub</a></li>
+                                </ul>
+                            </div>
+
+                            <div class="contact-method">
+                                <h3>⏱️ Response Time</h3>
+                                <p>We typically respond within 24-48 hours during business days.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="contact-form">
+                        <h2><span class="form-icon">✉️</span>Send us a Message</h2>
+                        <form id="contactForm" onsubmit="return false;">
+                            <div class="input-row">
+                                <div class="form-group">
+                                    <div class="input-wrapper">
+                                        <i class="form-icon user-icon"></i>
+                                        <input type="text" id="name" name="name" required>
+                                        <label for="name">Your Name</label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="input-wrapper">
+                                        <i class="form-icon email-icon"></i>
+                                        <input type="email" id="email" name="email" required>
+                                        <label for="email">Your Email</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="input-wrapper">
+                                    <i class="form-icon subject-icon"></i>
+                                    <select id="subject" name="subject" required>
+                                        <option value="" disabled selected>Choose a subject</option>
+                                        <option value="general">General Inquiry</option>
+                                        <option value="support">Technical Support</option>
+                                        <option value="feedback">Feedback</option>
+                                        <option value="bug">Report a Bug</option>
+                                        <option value="feature">Feature Request</option>
+                                    </select>
+                                    <label for="subject">Subject</label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="input-wrapper">
+                                    <i class="form-icon message-icon"></i>
+                                    <textarea id="message" name="message" rows="5" required></textarea>
+                                    <label for="message">Your Message</label>
+                                </div>
+                            </div>
+
+                            <div id="form-message" class="form-message"></div>
+                            
+                            <button type="submit" class="submit-btn">
+                                <span class="btn-text">Send Message</span>
+                                <span class="btn-icon">→</span>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="faq-section">
+                    <h2>Frequently Asked Questions</h2>
+                    <div class="faq-grid">
+                        <div class="faq-item">
+                            <h3>Is your service really free?</h3>
+                            <p>Yes! All our tools are completely free to use with no hidden charges.</p>
+                        </div>
+                        <div class="faq-item">
+                            <h3>Do I need to create an account?</h3>
+                            <p>No, you can use all our tools without registration.</p>
+                        </div>
+                        <div class="faq-item">
+                            <h3>Is my data secure?</h3>
+                            <p>Yes, all processing happens in your browser. We don't store any of your data.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer id="main-footer">
+        <!-- Footer content will be dynamically loaded -->
+    </footer>
+
+    <script type="module" src="../js/main.js"></script>
+    <script src="../js/contact-form.js"></script>
+</body>
+</html> 

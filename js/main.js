@@ -1,15 +1,15 @@
 // main.js
-import { initMobileNav } from './nav.js';
+import { initializeComponents } from './loadComponents.js';
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+    // Initialize components first
+    await initializeComponents();
+
     const toolsGrid = document.getElementById('tools-grid');
     const toolViewContainer = document.getElementById('tool-view-container');
-    const mainNav = document.getElementById('main-nav');
     const heroSection = document.getElementById('hero');
     const toolsGridSection = document.getElementById('tools-grid-section');
     const ctaButton = document.getElementById('cta-button');
-    const homeLink = mainNav.querySelector('a[href="#home"]');
-    document.getElementById('current-year').textContent = new Date().getFullYear();
 
     const tools = [
         { id: 'qr-generator', name: 'QR Code Generator', description: 'Generate QR codes from text or URLs.', icon: '📷' },
@@ -58,22 +58,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 window.scrollTo(0, 0);
             }
         }
-
-        // Update navigation active state
-        document.querySelectorAll('#main-nav .nav-link').forEach(link => link.classList.remove('active'));
-        const activeNavLink = mainNav.querySelector(`a[href="#${viewId || 'home'}"]`);
-        if (activeNavLink) activeNavLink.classList.add('active');
     }
     
     // Event Listeners
     ctaButton.addEventListener('click', () => {
         toolsGridSection.scrollIntoView({ behavior: 'smooth' });
-    });
-
-    homeLink.addEventListener('click', (e) => {
-        e.preventDefault();
-        history.pushState(null, '', '#home');
-        showView('home');
     });
 
     function handleHashChange() {
@@ -83,39 +72,41 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('hashchange', handleHashChange);
 
     // --- Populate Tool Cards and Tool Views ---
-    tools.forEach(tool => {
-        const card = document.createElement('div');
-        card.className = 'tool-card fade-in-scroll';
-        card.innerHTML = `
-            <h3>${tool.icon} ${tool.name}</h3>
-            <p>${tool.description}</p>
-            <button class="btn open-tool-btn" data-toolid="${tool.id}">Open Tool</button>
-        `;
-        
-        // Only trigger navigation when the button is clicked
-        const openButton = card.querySelector('.open-tool-btn');
-        openButton.addEventListener('click', (e) => {
-            e.stopPropagation(); // Prevent card click event
-            window.location.hash = tool.id;
-        });
-        
-        toolsGrid.appendChild(card);
+    if (toolsGrid) {
+        tools.forEach(tool => {
+            const card = document.createElement('div');
+            card.className = 'tool-card fade-in-scroll';
+            card.innerHTML = `
+                <h3>${tool.icon} ${tool.name}</h3>
+                <p>${tool.description}</p>
+                <button class="btn open-tool-btn" data-toolid="${tool.id}">Open Tool</button>
+            `;
+            
+            // Only trigger navigation when the button is clicked
+            const openButton = card.querySelector('.open-tool-btn');
+            openButton.addEventListener('click', (e) => {
+                e.stopPropagation(); // Prevent card click event
+                window.location.hash = tool.id;
+            });
+            
+            toolsGrid.appendChild(card);
 
-        const toolView = document.createElement('div');
-        toolView.id = tool.id;
-        toolView.className = 'tool-view';
-        toolView.innerHTML = `
-            <button class="btn back-to-home" style="margin-bottom: 20px; background-color: var(--tool-card-bg); color: var(--text-color); border: 1px solid var(--accent-color);">← Back to Tools</button>
-            <h2>${tool.icon} ${tool.name}</h2>
-            <div id="${tool.id}-content"></div>
-            <div class="loading-indicator" id="${tool.id}-loading">Processing...</div>
-        `;
-        toolView.querySelector('.back-to-home').addEventListener('click', (e) => {
-            e.preventDefault();
-            window.location.hash = 'home';
+            const toolView = document.createElement('div');
+            toolView.id = tool.id;
+            toolView.className = 'tool-view';
+            toolView.innerHTML = `
+                <button class="btn back-to-home" style="margin-bottom: 20px; background-color: var(--tool-card-bg); color: var(--text-color); border: 1px solid var(--accent-color);">← Back to Tools</button>
+                <h2>${tool.icon} ${tool.name}</h2>
+                <div id="${tool.id}-content"></div>
+                <div class="loading-indicator" id="${tool.id}-loading">Processing...</div>
+            `;
+            toolView.querySelector('.back-to-home').addEventListener('click', (e) => {
+                e.preventDefault();
+                window.location.hash = 'home';
+            });
+            toolViewContainer.appendChild(toolView);
         });
-        toolViewContainer.appendChild(toolView);
-    });
+    }
 
     // --- Initialize All Tools ---
     function initAllTools() {
@@ -146,9 +137,6 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('#tools-grid .tool-card').forEach(el => {
         observer.observe(el);
     });
-
-    // Initialize mobile navigation
-    initMobileNav();
 });
 
 // Utility functions that will be used across tools
