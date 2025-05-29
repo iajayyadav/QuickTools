@@ -1,0 +1,31 @@
+# robots.txt for QuickTools Hub
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://quicktoolshub.netlify.app/sitemap.xml
+
+# Crawl-delay for all bots
+Crawl-delay: 10
+
+# Additional rules for specific bots if needed
+User-agent: GPTBot
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# Prevent crawling of certain file types
+Disallow: /*.json$
+Disallow: /*.xml$
+Disallow: /*.txt$
+Disallow: /js/
+Disallow: /css/
+Disallow: /*.js$
+Disallow: /*.css$ 
