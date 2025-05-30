@@ -81,7 +81,7 @@ export function init() {
                     color: bgColorInput.value
                 },
                 cornersSquareOptions: {
-                    type: 'extra-rounded'
+                    type: 'square'
                 },
                 cornersDotOptions: {
                     type: 'dot'
@@ -96,6 +96,7 @@ export function init() {
                     imageSize: 0.4
                 };
             }
+            
 
             qrCode = new QRCodeStyling(options);
             qrCode.append(resultDiv);

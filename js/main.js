@@ -36,26 +36,36 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     // --- Navigation and View Management ---
     function showView(viewId) {
+        console.log('Showing view:', viewId);
         // Hide all sections first
         heroSection.style.display = 'none';
         toolsGridSection.style.display = 'none';
         toolViewContainer.style.display = 'none';
-        document.querySelectorAll('.tool-view').forEach(view => view.classList.remove('active'));
+        document.querySelectorAll('.tool-view').forEach(view => {
+            console.log('Removing active from view:', view.id);
+            view.classList.remove('active');
+        });
         
         if (viewId === 'home' || !viewId) {
+            console.log('Showing home view');
             // Show home page with tool cards
             heroSection.style.display = 'flex';
             toolsGridSection.style.display = 'block';
             document.title = 'QuickTools Hub - Your One-Stop Utility Platform';
         } else {
             // Show specific tool
+            console.log('Looking for tool view:', viewId);
             const targetView = document.getElementById(viewId);
+            console.log('Found target view:', targetView);
             if (targetView) {
+                console.log('Showing tool view:', viewId);
                 toolViewContainer.style.display = 'block';
                 targetView.classList.add('active');
                 const tool = tools.find(t => t.id === viewId);
                 document.title = `${tool?.name || 'Tool'} | QuickTools Hub`;
                 window.scrollTo(0, 0);
+            } else {
+                console.error('Tool view not found:', viewId);
             }
         }
     }
@@ -67,6 +77,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     function handleHashChange() {
         const hash = window.location.hash.substring(1);
+        console.log('Hash changed to:', hash);
         showView(hash || 'home');
     }
     window.addEventListener('hashchange', handleHashChange);
@@ -74,6 +85,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     // --- Populate Tool Cards and Tool Views ---
     if (toolsGrid) {
         tools.forEach(tool => {
+            console.log('Creating card for tool:', tool.id);
             const card = document.createElement('div');
             card.className = 'tool-card fade-in-scroll';
             card.innerHTML = `
@@ -86,11 +98,13 @@ document.addEventListener('DOMContentLoaded', async () => {
             const openButton = card.querySelector('.open-tool-btn');
             openButton.addEventListener('click', (e) => {
                 e.stopPropagation(); // Prevent card click event
+                console.log('Tool button clicked:', tool.id);
                 window.location.hash = tool.id;
             });
             
             toolsGrid.appendChild(card);
 
+            console.log('Creating view for tool:', tool.id);
             const toolView = document.createElement('div');
             toolView.id = tool.id;
             toolView.className = 'tool-view';
@@ -112,10 +126,15 @@ document.addEventListener('DOMContentLoaded', async () => {
     function initAllTools() {
         // Each tool's init function will be imported from its respective file
         tools.forEach(tool => {
-            import(`/js/tools/${tool.id}.js`)
+            console.log('Loading tool:', tool.id);
+            import(`./tools/${tool.id}.js`)
                 .then(module => {
+                    console.log('Tool loaded:', tool.id);
                     if (module.init) {
+                        console.log('Initializing tool:', tool.id);
                         module.init();
+                    } else {
+                        console.error('No init function found for tool:', tool.id);
                     }
                 })
                 .catch(err => console.error(`Error loading ${tool.id}:`, err));

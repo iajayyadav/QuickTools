@@ -76,7 +76,7 @@ input[type="color"]::-webkit-color-swatch {
     font-weight: normal;
 }
 
-input[type="range"] {
+/* input[type="range"] {
     width: 100%;
     height: 6px;
     -webkit-appearance: none;
@@ -84,12 +84,12 @@ input[type="range"] {
     border-radius: 3px;
     outline: none;
     margin: 10px 0;
-}
+} */
 
 input[type="range"]::-webkit-slider-thumb {
     -webkit-appearance: none;
-    width: 18px;
-    height: 18px;
+    width: 18px; 
+     height: 18px;
     background: white;
     border: 2px solid var(--accent-color);
     border-radius: 50%;

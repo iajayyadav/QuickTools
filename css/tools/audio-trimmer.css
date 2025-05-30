@@ -1,0 +1,274 @@
+.audio-trimmer-container {
+    background: var(--tool-card-bg);
+    padding: 2rem;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--soft-box-shadow);
+    text-align: center;
+    width: 90%;
+    max-width: 800px;
+    margin: 20px auto;
+}
+
+.audio-trimmer-title {
+    color: var(--text-color);
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.audio-trimmer-title .icon {
+    font-size: 2rem;
+}
+
+.audio-trimmer-drop-zone {
+    border: 2px dashed var(--accent-color);
+    padding: 2.5rem;
+    border-radius: var(--border-radius-lg);
+    cursor: pointer;
+    color: var(--text-color);
+    margin-bottom: 1.5rem;
+    transition: all var(--transition-speed) ease;
+    background: rgba(0, 184, 148, 0.05);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.audio-trimmer-drop-zone .icon {
+    font-size: 3rem;
+    color: var(--accent-color);
+    opacity: 0.8;
+    transition: all var(--transition-speed) ease;
+}
+
+.audio-trimmer-drop-zone .text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.audio-trimmer-drop-zone .primary-text {
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.audio-trimmer-drop-zone .secondary-text {
+    font-size: 0.9rem;
+    opacity: 0.7;
+}
+
+.audio-trimmer-drop-zone.dragover {
+    background: rgba(0, 184, 148, 0.1);
+    border-color: var(--accent-color);
+    transform: translateY(-2px);
+}
+
+.audio-trimmer-drop-zone.dragover .icon {
+    transform: scale(1.1);
+    opacity: 1;
+}
+
+.audio-trimmer-controls {
+    display: none;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    background: rgba(0, 184, 148, 0.05);
+    border-radius: var(--border-radius-lg);
+    margin-top: 1rem;
+}
+
+.audio-trimmer-player-container {
+    background: var(--tool-card-bg);
+    padding: 1rem;
+    border-radius: var(--border-radius-lg);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.audio-trimmer-controls audio {
+    width: 100%;
+    margin-bottom: 0.5rem;
+    border-radius: var(--border-radius-lg);
+}
+
+.audio-trimmer-time-controls {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin: 1rem 0;
+}
+
+.audio-trimmer-controls label {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+    color: var(--text-color);
+    font-size: 0.9em;
+}
+
+.audio-trimmer-time-display {
+    font-family: monospace;
+    font-size: 1.1em;
+    color: var(--accent-color);
+    margin-top: 0.25rem;
+}
+
+.audio-trimmer-controls input[type=range] {
+    width: 100%;
+    height: 6px;
+    -webkit-appearance: none;
+    background: rgba(0, 184, 148, 0.2);
+    border-radius: 3px;
+    outline: none;
+}
+
+.audio-trimmer-controls input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    background: var(--accent-color);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all var(--transition-speed) ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.audio-trimmer-controls input[type=range]::-webkit-slider-thumb:hover {
+    background: var(--accent-color-dark);
+    transform: scale(1.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.audio-trimmer-button-group {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.audio-trimmer-button {
+    flex: 1;
+    padding: 0.8rem 1.5rem;
+    background: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: var(--border-radius-lg);
+    cursor: pointer;
+    transition: all var(--transition-speed) ease;
+    font-size: 1em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.audio-trimmer-button:hover {
+    background: var(--accent-color-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 184, 148, 0.2);
+}
+
+.audio-trimmer-button.secondary {
+    background: rgba(0, 184, 148, 0.1);
+    color: var(--accent-color);
+}
+
+.audio-trimmer-button.secondary:hover {
+    background: rgba(0, 184, 148, 0.2);
+}
+
+.audio-trimmer-button .icon {
+    font-size: 1.2em;
+}
+
+.audio-trimmer-toast {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 1rem 1.5rem;
+    border-radius: var(--border-radius-lg);
+    color: white;
+    font-size: 0.9em;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity var(--transition-speed) ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.audio-trimmer-toast.success {
+    background: var(--accent-color);
+}
+
+.audio-trimmer-toast.error {
+    background: #e74c3c;
+}
+
+.audio-trimmer-toast.show {
+    opacity: 1;
+}
+
+/* Loading State */
+.audio-trimmer-loading {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.9);
+    justify-content: center;
+    align-items: center;
+    border-radius: var(--border-radius-lg);
+}
+
+.audio-trimmer-loading.show {
+    display: flex;
+}
+
+.audio-trimmer-spinner {
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(0, 184, 148, 0.1);
+    border-top-color: var(--accent-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .audio-trimmer-container {
+        width: 95%;
+        padding: 1rem;
+    }
+
+    .audio-trimmer-drop-zone {
+        padding: 1.5rem;
+    }
+
+    .audio-trimmer-time-controls {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .audio-trimmer-button-group {
+        flex-direction: column;
+    }
+
+    .audio-trimmer-button {
+        width: 100%;
+    }
+} 
