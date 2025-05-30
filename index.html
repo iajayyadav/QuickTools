@@ -1,19 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <!-- SEO Meta Tags -->
-    <meta name="description" content="QuickTools Hub - Your One-Stop Utility Platform. Fast, Free, and Secure Online Tools for Productivity, File Conversion, QR Code Generation, and More.">
-    <meta name="keywords" content="QuickTools, Online Tools, Free Tools, Web Utilities, Image Converter, Audio Trimmer, QR Code Generator, Word Counter, JSON Formatter, Calculator, File Tools">
+    <meta name="description"
+        content="QuickTools Hub - Your One-Stop Utility Platform. Fast, Free, and Secure Online Tools for Productivity, File Conversion, QR Code Generation, and More.">
+    <meta name="keywords"
+        content="QuickTools, Online Tools, Free Tools, Web Utilities, Image Converter, Audio Trimmer, QR Code Generator, Word Counter, JSON Formatter, Calculator, File Tools">
     <meta name="author" content="Ajay Yadav">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://quicktoolshub.netlify.app/">
-    
+
     <!-- Open Graph Meta -->
     <meta property="og:title" content="QuickTools Hub - Free Online Tools for Everyone">
-    <meta property="og:description" content="QuickTools Hub offers a suite of 20+ powerful tools including file converters, calculators, and more. Fast, free, and secure!">
+    <meta property="og:description"
+        content="QuickTools Hub offers a suite of 20+ powerful tools including file converters, calculators, and more. Fast, free, and secure!">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://quicktoolshub.netlify.app/">
     <meta property="og:image" content="https://quicktoolshub.netlify.app/assets/og-image.png">
@@ -21,27 +25,29 @@
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="QuickTools Hub - Free Online Tools for Everyone">
-    <meta name="twitter:description" content="QuickTools Hub offers a suite of 20+ powerful tools including file converters, calculators, and more. Fast, free, and secure!">
+    <meta name="twitter:description"
+        content="QuickTools Hub offers a suite of 20+ powerful tools including file converters, calculators, and more. Fast, free, and secure!">
     <meta name="twitter:image" content="https://quicktoolshub.netlify.app/assets/og-image.png">
 
     <title>QuickTools Hub - Free Online Tools for Everyone | Powerful, Easy-to-Use Utilities for Daily Tasks</title>
 
-    
+
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    
+
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛠️</text></svg>">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛠️</text></svg>">
 
     <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-9DLDZD1EC1"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-9DLDZD1EC1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
 
-  gtag('config', 'G-9DLDZD1EC1');
-</script>
+        gtag('config', 'G-9DLDZD1EC1');
+    </script>
 
     <style>
         .feature-grid {
@@ -50,6 +56,7 @@
             gap: 2rem;
             margin: 2rem 0;
         }
+
         .feature-card {
             background: var(--tool-card-bg);
             padding: 1.5rem;
@@ -57,44 +64,53 @@
             box-shadow: var(--soft-box-shadow);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
+
         .feature-card h3 {
             color: var(--accent-color);
             margin-bottom: 1rem;
             font-size: 1.2em;
         }
+
         .feature-card p {
             color: var(--text-color);
             line-height: 1.6;
         }
+
         .info-section {
             padding: 4rem 0;
             background: var(--bg-color);
         }
+
         .info-section:nth-child(even) {
             background: var(--tool-card-bg);
         }
+
         .info-content {
             max-width: 800px;
             margin: 0 auto;
             padding: 0 1rem;
         }
+
         .info-section h2 {
             color: var(--text-color);
             font-size: 2em;
             margin-bottom: 1.5rem;
             text-align: center;
         }
+
         .info-section p {
             color: var(--text-color);
             line-height: 1.8;
             margin-bottom: 1.5rem;
         }
+
         .category-list {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 1rem;
             margin: 2rem 0;
         }
+
         .category-item {
             background: var(--bg-color);
             padding: 1rem;
@@ -102,9 +118,11 @@
             text-align: center;
             transition: transform 0.3s ease;
         }
+
         .category-item:hover {
             transform: translateY(-5px);
         }
+
         .category-item h4 {
             color: var(--accent-color);
             margin-bottom: 0.5rem;
@@ -122,7 +140,9 @@
         }
 
         @keyframes spin {
-            to { transform: rotate(360deg); }
+            to {
+                transform: rotate(360deg);
+            }
         }
 
         .loading-container {
@@ -140,15 +160,15 @@
                 grid-template-columns: 1fr;
                 gap: 1.5rem;
             }
-            
+
             .category-list {
                 grid-template-columns: 1fr;
             }
-            
+
             .info-section {
                 padding: 2rem 0;
             }
-            
+
             .info-section h2 {
                 font-size: 1.75em;
             }
@@ -182,6 +202,7 @@
         }
     </style>
 </head>
+
 <body>
     <!-- Header will be loaded dynamically -->
     <header id="main-header"></header>
@@ -190,7 +211,8 @@
         <section id="hero">
             <div class="container">
                 <h1>Your One-Stop Utility Platform – Fast, Free, and Secure</h1>
-                <p>Access over 20 powerful online tools to boost your productivity. No installation needed, no sign-up required.</p>
+                <p>Access over 20 powerful online tools to boost your productivity. No installation needed, no sign-up
+                    required.</p>
                 <button id="cta-button" class="btn">Get Started</button>
             </div>
         </section>
@@ -220,8 +242,9 @@
     <!-- QR Code Libraries -->
     <script src="https://cdn.jsdelivr.net/npm/qr-code-styling/lib/qr-code-styling.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    
+
     <!-- Main Script -->
     <script type="module" src="js/main.js"></script>
 </body>
+
 </html>

@@ -8,6 +8,40 @@
         <priority>1.0</priority>
     </url>
 
+    <!-- Main Pages -->
+    <url>
+        <loc>https://quicktoolshub.netlify.app/pages/about.html</loc>
+        <lastmod>2024-03-21</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://quicktoolshub.netlify.app/pages/contact.html</loc>
+        <lastmod>2024-03-21</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://quicktoolshub.netlify.app/pages/faq.html</loc>
+        <lastmod>2024-03-21</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Legal Pages -->
+    <url>
+        <loc>https://quicktoolshub.netlify.app/pages/privacy.html</loc>
+        <lastmod>2024-03-21</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    <url>
+        <loc>https://quicktoolshub.netlify.app/pages/terms.html</loc>
+        <lastmod>2024-03-21</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+
     <!-- Calculator Tools -->
     <url>
         <loc>https://quicktoolshub.netlify.app/#age-calculator</loc>
