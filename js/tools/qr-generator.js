@@ -2,35 +2,154 @@ import { showToast, setLoading, createFileDownloadLink } from '../main.js';
 
 export function init() {
     const contentDiv = document.getElementById('qr-generator-content');
+    
+    const styles = {
+        seoContent: `
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        `,
+        heading: `
+            color: var(--text-color);
+            margin: 1.5rem 0 1rem;
+            font-size: 1.5em;
+        `,
+        subheading: `
+            color: var(--text-color);
+            margin: 1.5rem 0 1rem;
+            font-size: 1.2em;
+        `,
+        paragraph: `
+            margin-bottom: 1rem;
+            color: var(--text-color);
+            line-height: 1.6;
+        `,
+        featureList: `
+            list-style: disc;
+            margin: 1rem 0 1rem 1.5rem;
+        `,
+        featureItem: `
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
+        `,
+        useCaseList: `
+            list-style: none;
+            margin: 1rem 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        `,
+        useCaseItem: `
+            background: var(--tool-card-bg);
+            padding: 1rem;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--soft-box-shadow);
+        `
+    };
+
     contentDiv.innerHTML = `
-        <div class="form-group">
-            <label for="qr-text">Text or URL:</label>
-            <input type="text" id="qr-text" placeholder="Enter text or URL">
+        <div class="qr-tool-container">
+            <div class="form-group">
+                <label for="qr-text">Text or URL:</label>
+                <input type="text" id="qr-text" placeholder="Enter text or URL">
+            </div>
+            <details>
+                <summary style="margin-bottom: 1.5rem;">More Options</summary>
+                <div class="form-group">
+                    <label for="qr-color">QR Code Color:</label>
+                    <input type="color" id="qr-color" value="#000000">
+                </div>
+                <div class="form-group">
+                    <label for="qr-bg-color">Background Color:</label>
+                    <input type="color" id="qr-bg-color" value="#FFFFFF">
+                </div>
+                <div class="form-group">
+                    <label for="qr-logo">Logo URL (optional):</label>
+                    <input type="url" id="qr-logo" placeholder="https://example.com/logo.png">
+                </div>
+            </details>
+            <div class="form-group">
+                <label for="qr-size">QR Code Size:</label>
+                <input type="range" id="qr-size" min="100" max="400" value="200" step="10">
+                <span id="qr-size-value">200 x 200</span>
+            </div>
+            <button id="qr-generate-btn" class="btn">Generate QR Code</button>
+            <div class="preview-area" style="text-align:center; margin-top: 1rem;">
+                <div id="qr-code-result"></div>
+            </div>
+            <div class="btn-group" style="display:flex; gap:1rem; justify-content:center; margin-top:1rem;">
+                <button id="qr-download-png" class="btn" style="display:none;">Download PNG</button>
+                <button id="qr-download-pdf" class="btn" style="display:none;">Download PDF</button>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="qr-color">QR Code Color:</label>
-            <input type="color" id="qr-color" value="#000000">
-        </div>
-        <div class="form-group">
-            <label for="qr-bg-color">Background Color:</label>
-            <input type="color" id="qr-bg-color" value="#FFFFFF">
-        </div>
-        <div class="form-group">
-            <label for="qr-logo">Logo URL (optional):</label>
-            <input type="url" id="qr-logo" placeholder="https://example.com/logo.png">
-        </div>
-        <div class="form-group">
-            <label for="qr-size">QR Code Size:</label>
-            <input type="range" id="qr-size" min="100" max="400" value="200" step="10">
-            <span id="qr-size-value">200 x 200</span>
-        </div>
-        <button id="qr-generate-btn" class="btn">Generate QR Code</button>
-        <div class="preview-area" style="text-align:center; margin-top: 1rem;">
-            <div id="qr-code-result"></div>
-        </div>
-        <div class="btn-group" style="display:flex; gap:1rem; justify-content:center; margin-top:1rem;">
-            <button id="qr-download-png" class="btn" style="display:none;">Download PNG</button>
-            <button id="qr-download-pdf" class="btn" style="display:none;">Download PDF</button>
+
+        <div style="${styles.seoContent}">
+            <h2 style="${styles.heading}">Free QR Code Generator</h2>
+            <p style="${styles.paragraph}">
+                Create customizable QR codes instantly with our free QR code generator. Whether you need 
+                to share links, contact information, or any text-based data, our tool makes it easy to 
+                generate professional QR codes with advanced customization options.
+            </p>
+
+            <h3 style="${styles.subheading}">Features</h3>
+            <ul style="${styles.featureList}">
+                <li style="${styles.featureItem}">Custom colors for QR code and background</li>
+                <li style="${styles.featureItem}">Adjustable size settings (100x100 to 400x400 pixels)</li>
+                <li style="${styles.featureItem}">Logo integration capability</li>
+                <li style="${styles.featureItem}">Multiple download formats (PNG and PDF)</li>
+                <li style="${styles.featureItem}">High-quality vector output</li>
+                <li style="${styles.featureItem}">Mobile-friendly design</li>
+            </ul>
+
+            <h3 style="${styles.subheading}">Popular Use Cases</h3>
+            <div style="${styles.useCaseList}">
+                <div style="${styles.useCaseItem}">
+                    <h4>Business Cards</h4>
+                    <p>Add contact information and website links to digital business cards.</p>
+                </div>
+                <div style="${styles.useCaseItem}">
+                    <h4>Marketing Materials</h4>
+                    <p>Link print materials to digital content and landing pages.</p>
+                </div>
+                <div style="${styles.useCaseItem}">
+                    <h4>Product Packaging</h4>
+                    <p>Include product information, manuals, and registration links.</p>
+                </div>
+                <div style="${styles.useCaseItem}">
+                    <h4>Event Management</h4>
+                    <p>Share event details, tickets, and registration information.</p>
+                </div>
+            </div>
+
+            <h3 style="${styles.subheading}">How QR Codes Work</h3>
+            <p style="${styles.paragraph}">
+                QR (Quick Response) codes are two-dimensional barcodes that can store various types of 
+                information. When scanned with a smartphone camera or QR code reader, they instantly 
+                provide access to the encoded information, whether it's a website URL, plain text, 
+                contact details, or other data formats.
+            </p>
+
+            <h3 style="${styles.subheading}">Best Practices</h3>
+            <p style="${styles.paragraph}">
+                For optimal QR code performance, consider these tips:
+            </p>
+            <ul style="${styles.featureList}">
+                <li style="${styles.featureItem}">Ensure sufficient contrast between QR code and background colors</li>
+                <li style="${styles.featureItem}">Test your QR code on multiple devices before publishing</li>
+                <li style="${styles.featureItem}">Keep the encoded data concise for better scanning reliability</li>
+                <li style="${styles.featureItem}">If adding a logo, ensure it doesn't interfere with the QR code pattern</li>
+                <li style="${styles.featureItem}">Choose an appropriate size based on scanning distance</li>
+            </ul>
+
+            <h3 style="${styles.subheading}">Technical Specifications</h3>
+            <p style="${styles.paragraph}">
+                Our QR code generator creates high-quality codes using the latest QR code standards. 
+                The generated codes support error correction and can be customized with various options 
+                including custom colors, sizes, and logo integration. Downloads are available in both 
+                PNG format for digital use and PDF format for professional printing.
+            </p>
         </div>
     `;
 

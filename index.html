@@ -25,8 +25,151 @@
     <meta name="twitter:image" content="https://quicktoolshub.netlify.app/assets/og-image.png">
 
     <title>QuickTools Hub - Free Online Tools for Everyone</title>
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛠️</text></svg>">
+
+    <style>
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        .feature-card {
+            background: var(--tool-card-bg);
+            padding: 1.5rem;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--soft-box-shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .feature-card h3 {
+            color: var(--accent-color);
+            margin-bottom: 1rem;
+            font-size: 1.2em;
+        }
+        .feature-card p {
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+        .info-section {
+            padding: 4rem 0;
+            background: var(--bg-color);
+        }
+        .info-section:nth-child(even) {
+            background: var(--tool-card-bg);
+        }
+        .info-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        .info-section h2 {
+            color: var(--text-color);
+            font-size: 2em;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        .info-section p {
+            color: var(--text-color);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+        .category-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        .category-item {
+            background: var(--bg-color);
+            padding: 1rem;
+            border-radius: var(--border-radius-lg);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        .category-item:hover {
+            transform: translateY(-5px);
+        }
+        .category-item h4 {
+            color: var(--accent-color);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Loading animation */
+        .loading-spinner {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: var(--accent-color);
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .loading-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 200px;
+            gap: 1rem;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .feature-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .category-list {
+                grid-template-columns: 1fr;
+            }
+            
+            .info-section {
+                padding: 2rem 0;
+            }
+            
+            .info-section h2 {
+                font-size: 1.75em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .info-content {
+                padding: 0 1rem;
+            }
+        }
+
+        /* Tool card icon styles */
+        .tool-card .fas {
+            font-size: 1.5em;
+            margin-right: 10px;
+            color: var(--accent-color);
+            vertical-align: middle;
+        }
+
+        .tool-view h2 .fas {
+            color: var(--accent-color);
+            margin-right: 10px;
+        }
+
+        .loading-indicator .fas {
+            margin-right: 8px;
+        }
+
+        .back-to-home .fas {
+            margin-right: 8px;
+        }
+    </style>
 </head>
 <body>
     <!-- Header will be loaded dynamically -->
@@ -35,7 +178,8 @@
     <main>
         <section id="hero">
             <div class="container">
-                <h2>Your One-Stop Utility Platform – Fast, Free, and Secure</h2>
+                <h1>Your One-Stop Utility Platform – Fast, Free, and Secure</h1>
+                <p>Access over 20 powerful online tools to boost your productivity. No installation needed, no sign-up required.</p>
                 <button id="cta-button" class="btn">Get Started</button>
             </div>
         </section>
@@ -48,6 +192,14 @@
 
         <div id="tool-view-container">
             <!-- Tool UIs will be injected here -->
+        </div>
+
+        <div id="home-content-container">
+            <!-- Home content will be dynamically loaded here -->
+            <div class="loading-container">
+                <div class="loading-spinner"></div>
+                <p>Loading content...</p>
+            </div>
         </div>
     </main>
 

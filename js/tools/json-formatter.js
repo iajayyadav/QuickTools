@@ -82,11 +82,73 @@ export function init() {
             align-items: center;
             gap: 0.5rem;
             color: var(--text-color);
+        `,
+        seoContent: `
+            margin-bottom: 2rem;
+            color: var(--text-color);
+            line-height: 1.6;
+        `,
+        heading: `
+            color: var(--text-color);
+            margin-bottom: 1rem;
+            font-size: 1.5em;
+        `,
+        subheading: `
+            color: var(--text-color);
+            margin: 1rem 0;
+            font-size: 1.2em;
+        `,
+        paragraph: `
+            margin-bottom: 1rem;
+            color: var(--text-color);
+            line-height: 1.6;
+        `,
+        featureList: `
+            list-style: disc;
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        `,
+        featureItem: `
+            margin-bottom: 0.5rem;
+            color: var(--text-color);
         `
     };
 
     contentDiv.innerHTML = `
         <div style="${styles.container}">
+            <div style="${styles.seoContent}">
+                <h1 style="${styles.heading}">JSON Formatter and Validator</h1>
+                <p style="${styles.paragraph}">
+                    Transform your raw JSON data into a clean, readable format with our powerful JSON formatter tool. 
+                    Whether you're a developer debugging API responses, working with configuration files, or just need 
+                    to make your JSON data more readable, this tool has you covered.
+                </p>
+                
+                <h2 style="${styles.subheading}">Key Features</h2>
+                <ul style="${styles.featureList}">
+                    <li style="${styles.featureItem}">Format JSON with customizable indentation (2 spaces, 4 spaces, or tabs)</li>
+                    <li style="${styles.featureItem}">Minify JSON by removing unnecessary whitespace</li>
+                    <li style="${styles.featureItem}">Sort object keys alphabetically for better organization</li>
+                    <li style="${styles.featureItem}">Validate JSON syntax and get clear error messages</li>
+                    <li style="${styles.featureItem}">Copy formatted JSON to clipboard with one click</li>
+                </ul>
+
+                <h2 style="${styles.subheading}">How to Use</h2>
+                <p style="${styles.paragraph}">
+                    Simply paste your JSON into the input area on the left. Choose your preferred formatting options 
+                    from the controls above. Click "Format JSON" to beautify your code, or "Minify" to compress it. 
+                    The formatted result will appear in the right panel. Use keyboard shortcuts like Ctrl+Enter 
+                    (Cmd+Enter on Mac) to format quickly.
+                </p>
+
+                <h2 style="${styles.subheading}">Pro Tips</h2>
+                <p style="${styles.paragraph}">
+                    Double-click the input area when empty to load a sample JSON. This helps you quickly understand 
+                    the tool's capabilities. The "Sort Keys" option is particularly useful when comparing different 
+                    JSON objects or creating consistent configurations.
+                </p>
+            </div>
+
             <div style="${styles.controlsSection}">
                 <button id="formatBtn" style="${styles.button}${styles.primaryBtn}">
                     <span class="icon">🔄</span> Format JSON
@@ -117,6 +179,7 @@ export function init() {
                         placeholder="Paste your JSON here..."
                         style="${styles.textarea}"
                         spellcheck="false"
+                        aria-label="Input JSON"
                     ></textarea>
                 </div>
                 <div>
@@ -126,11 +189,29 @@ export function init() {
                         placeholder="Formatted JSON will appear here..."
                         style="${styles.textarea}"
                         spellcheck="false"
+                        aria-label="Formatted JSON Output"
                     ></textarea>
                 </div>
             </div>
             
             <div id="errorMsg" style="${styles.errorMessage}"></div>
+
+            <div style="${styles.seoContent}">
+                <h2 style="${styles.subheading}">About JSON Formatting</h2>
+                <p style="${styles.paragraph}">
+                    JSON (JavaScript Object Notation) is a lightweight data interchange format that's easy for humans 
+                    to read and write and easy for machines to parse and generate. However, when working with 
+                    minified or poorly formatted JSON, it can be challenging to understand the structure and 
+                    relationships between data elements.
+                </p>
+                <p style="${styles.paragraph}">
+                    Our JSON formatter helps solve this problem by automatically formatting your JSON with proper 
+                    indentation and line breaks. It also validates your JSON to ensure it follows the correct syntax, 
+                    helping you catch and fix errors quickly. Whether you're debugging API responses, configuring 
+                    applications, or learning about JSON structure, this tool makes your JSON data clear and 
+                    manageable.
+                </p>
+            </div>
         </div>
     `;
 

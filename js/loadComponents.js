@@ -1,4 +1,6 @@
 // Function to load HTML components
+import { initNav } from './nav.js';
+
 async function loadComponent(elementId, componentPath) {
     try {
         const response = await fetch(componentPath);
@@ -8,10 +10,9 @@ async function loadComponent(elementId, componentPath) {
         const content = await response.text();
         document.getElementById(elementId).innerHTML = content;
 
-        // Initialize mobile menu after loading nav
+        // Initialize navigation after loading header
         if (elementId === 'main-header') {
-            initializeMobileMenu();
-            initializeNavigation();
+            initNav();
         }
     } catch (error) {
         console.error('Error loading component:', error);

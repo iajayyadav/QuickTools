@@ -1,5 +1,6 @@
 // main.js
 import { initializeComponents } from './loadComponents.js';
+import { createHomeContent, initHomeContent } from './homeContent.js';
 
 document.addEventListener('DOMContentLoaded', async () => {
     // Initialize components first
@@ -10,37 +11,40 @@ document.addEventListener('DOMContentLoaded', async () => {
     const heroSection = document.getElementById('hero');
     const toolsGridSection = document.getElementById('tools-grid-section');
     const ctaButton = document.getElementById('cta-button');
+    const homeContentContainer = document.getElementById('home-content-container');
 
     const tools = [
-        { id: 'qr-generator', name: 'QR Code Generator', description: 'Generate QR codes from text or URLs.', icon: '📷' },
-        { id: 'password-generator', name: 'Password Generator', description: 'Create strong, secure passwords.', icon: '🔒' },
-        { id: 'image-converter', name: 'Image Converter', description: 'Convert images between JPG, PNG, WEBP.', icon: '🖼️' },
-        { id: 'image-compressor', name: 'Image Compressor', description: 'Reduce image file size (JPG/WEBP).', icon: '📦' },
-        { id: 'image-cropper', name: 'Image Cropper', description: 'Crop images (basic implementation).', icon: '✂️' },
-        { id: 'video-converter', name: 'Video Converter', description: 'Browser limitations apply. Can record.', icon: '🎬' },
-        { id: 'audio-converter', name: 'Audio Converter', description: 'Convert audio (e.g., MP3 to WAV).', icon: '🎵' },
-        { id: 'audio-trimmer', name: 'Audio Trimmer', description: 'Trim audio clips (WAV output).', icon: '🎧' },
-        { id: 'age-calculator', name: 'Age Calculator', description: 'Calculate age from date of birth.', icon: '🎂' },
-        { id: 'emi-calculator', name: 'EMI Calculator', description: 'Calculate Equated Monthly Installments.', icon: '📈' },
-        { id: 'sip-calculator', name: 'SIP Calculator', description: 'Estimate returns on Systematic Investments.', icon: '💰' },
-        { id: 'word-counter', name: 'Word Counter', description: 'Count words, characters, reading time.', icon: '📝' },
-        { id: 'base64-coder', name: 'Base64 Encoder/Decoder', description: 'Encode to or decode from Base64.', icon: '🔄' },
-        { id: 'color-picker', name: 'Color Picker', description: 'Pick colors and get HEX, RGB, HSL values.', icon: '🎨' },
-        { id: 'text-to-speech', name: 'Text to Speech', description: 'Convert text into spoken audio.', icon: '🗣️' },
-        { id: 'speech-to-text', name: 'Speech to Text', description: 'Convert spoken words into text.', icon: '🎤' },
-        { id: 'json-formatter', name: 'JSON Formatter', description: 'Format, validate, and beautify JSON.', icon: '📄' },
-        { id: 'unit-converter', name: 'Unit Converter', description: 'Convert length, weight, temperature.', icon: '📏' },
-        { id: 'bmi-calculator', name: 'BMI Calculator', description: 'Calculate Body Mass Index.', icon: '💪' },
-        { id: 'timer-stopwatch', name: 'Timer/Stopwatch', description: 'Simple timer and stopwatch.', icon: '⏱️' }
+        { id: 'qr-generator', name: 'QR Code Generator', description: 'Generate QR codes from text or URLs.', icon: '<i class="fas fa-qrcode"></i>' },
+        { id: 'password-generator', name: 'Password Generator', description: 'Create strong, secure passwords.', icon: '<i class="fas fa-key"></i>' },
+        { id: 'image-converter', name: 'Image Converter', description: 'Convert images between JPG, PNG, WEBP.', icon: '<i class="fas fa-images"></i>' },
+        { id: 'image-compressor', name: 'Image Compressor', description: 'Reduce image file size (JPG/WEBP).', icon: '<i class="fas fa-compress-arrows-alt"></i>' },
+        { id: 'image-cropper', name: 'Image Cropper', description: 'Crop images (basic implementation).', icon: '<i class="fas fa-crop-alt"></i>' },
+        { id: 'video-converter', name: 'Video Converter', description: 'Browser limitations apply. Can record.', icon: '<i class="fas fa-video"></i>' },
+        { id: 'audio-converter', name: 'Audio Converter', description: 'Convert audio (e.g., MP3 to WAV).', icon: '<i class="fas fa-file-audio"></i>' },
+        { id: 'audio-trimmer', name: 'Audio Trimmer', description: 'Trim audio clips (WAV output).', icon: '<i class="fas fa-cut"></i>' },
+        { id: 'age-calculator', name: 'Age Calculator', description: 'Calculate age from date of birth.', icon: '<i class="fas fa-calendar-alt"></i>' },
+        { id: 'emi-calculator', name: 'EMI Calculator', description: 'Calculate Equated Monthly Installments.', icon: '<i class="fas fa-calculator"></i>' },
+        { id: 'sip-calculator', name: 'SIP Calculator', description: 'Estimate returns on Systematic Investments.', icon: '<i class="fas fa-chart-line"></i>' },
+        { id: 'word-counter', name: 'Word Counter', description: 'Count words, characters, reading time.', icon: '<i class="fas fa-font"></i>' },
+        { id: 'base64-coder', name: 'Base64 Encoder/Decoder', description: 'Encode to or decode from Base64.', icon: '<i class="fas fa-exchange-alt"></i>' },
+        { id: 'color-picker', name: 'Color Picker', description: 'Pick colors and get HEX, RGB, HSL values.', icon: '<i class="fas fa-palette"></i>' },
+        { id: 'text-to-speech', name: 'Text to Speech', description: 'Convert text into spoken audio.', icon: '<i class="fas fa-volume-up"></i>' },
+        { id: 'speech-to-text', name: 'Speech to Text', description: 'Convert spoken words into text.', icon: '<i class="fas fa-microphone"></i>' },
+        { id: 'json-formatter', name: 'JSON Formatter', description: 'Format, validate, and beautify JSON.', icon: '<i class="fas fa-code"></i>' },
+        { id: 'unit-converter', name: 'Unit Converter', description: 'Convert length, weight, temperature.', icon: '<i class="fas fa-ruler-combined"></i>' },
+        { id: 'bmi-calculator', name: 'BMI Calculator', description: 'Calculate Body Mass Index.', icon: '<i class="fas fa-weight"></i>' },
+        { id: 'timer-stopwatch', name: 'Timer/Stopwatch', description: 'Simple timer and stopwatch.', icon: '<i class="fas fa-stopwatch"></i>' }
     ];
 
     // --- Navigation and View Management ---
-    function showView(viewId) {
+    async function showView(viewId) {
         console.log('Showing view:', viewId);
         // Hide all sections first
         heroSection.style.display = 'none';
         toolsGridSection.style.display = 'none';
         toolViewContainer.style.display = 'none';
+        homeContentContainer.style.display = 'none';
+
         document.querySelectorAll('.tool-view').forEach(view => {
             console.log('Removing active from view:', view.id);
             view.classList.remove('active');
@@ -51,7 +55,21 @@ document.addEventListener('DOMContentLoaded', async () => {
             // Show home page with tool cards
             heroSection.style.display = 'flex';
             toolsGridSection.style.display = 'block';
+            homeContentContainer.style.display = 'block';
             document.title = 'QuickTools Hub - Your One-Stop Utility Platform';
+
+            // Load home content if not already loaded
+            if (!homeContentContainer.querySelector('#home-content')) {
+                try {
+                    const homeContent = createHomeContent();
+                    homeContentContainer.innerHTML = '';
+                    homeContentContainer.appendChild(homeContent);
+                    initHomeContent();
+                } catch (error) {
+                    console.error('Error loading home content:', error);
+                    homeContentContainer.innerHTML = '<p>Error loading content. Please refresh the page.</p>';
+                }
+            }
         } else {
             // Show specific tool
             console.log('Looking for tool view:', viewId);
@@ -109,10 +127,14 @@ document.addEventListener('DOMContentLoaded', async () => {
             toolView.id = tool.id;
             toolView.className = 'tool-view';
             toolView.innerHTML = `
-                <button class="btn back-to-home" style="margin-bottom: 20px; background-color: var(--tool-card-bg); color: var(--text-color); border: 1px solid var(--accent-color);">← Back to Tools</button>
+                <button class="btn back-to-home" style="margin-bottom: 20px; background-color: var(--tool-card-bg); color: var(--text-color); border: 1px solid var(--accent-color);">
+                    <i class="fas fa-arrow-left"></i> Back to Tools
+                </button>
                 <h2>${tool.icon} ${tool.name}</h2>
                 <div id="${tool.id}-content"></div>
-                <div class="loading-indicator" id="${tool.id}-loading">Processing...</div>
+                <div class="loading-indicator" id="${tool.id}-loading">
+                    <i class="fas fa-spinner fa-spin"></i> Processing...
+                </div>
             `;
             toolView.querySelector('.back-to-home').addEventListener('click', (e) => {
                 e.preventDefault();

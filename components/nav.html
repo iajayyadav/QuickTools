@@ -1,51 +1,135 @@
 <div class="container">
     <div class="header-left">
-        <h1 id="logo"><a href="/">QuickTools Hub</a></h1>
+        <h1 id="logo">
+            <a href="/">
+                <span class="logo-icon"><i class="fas fa-tools"></i></span>
+                <span class="logo-text">QuickTools Hub</span>
+            </a>
+        </h1>
     </div>
-    <div class="hamburger-menu" aria-label="Menu">
+
+    <div class="hamburger-menu" aria-label="Menu" role="button" tabindex="0">
         <span></span>
         <span></span>
         <span></span>
     </div>
-    <nav id="main-nav">
-        <a href="/" class="nav-link active">Home</a>
+
+    <nav id="main-nav" aria-label="Main navigation">
+        <div class="nav-section">
+            <a href="/" class="nav-link active" aria-current="page">
+                <span class="nav-icon"><i class="fas fa-home"></i></span>
+                <span class="nav-text">Home</span>
+            </a>
+        </div>
         
-        <div class="nav-dropdown">
-            <a href="#" class="nav-link">Calculators</a>
-            <div class="nav-dropdown-content">
-                <a href="/#age-calculator" class="nav-dropdown-item">Age Calculator</a>
-                <a href="/#bmi-calculator" class="nav-dropdown-item">BMI Calculator</a>
-                <a href="/#emi-calculator" class="nav-dropdown-item">EMI Calculator</a>
-                <a href="/#sip-calculator" class="nav-dropdown-item">SIP Calculator</a>
+        <div class="nav-section">
+            <div class="nav-dropdown">
+                <a href="#" class="nav-link" aria-haspopup="true">
+                    <span class="nav-icon"><i class="fas fa-calculator"></i></span>
+                    <span class="nav-text">Calculators</span>
+                    <span class="dropdown-arrow"><i class="fas fa-chevron-down"></i></span>
+                </a>
+                <div class="nav-dropdown-content" role="menu">
+                    <a href="/#age-calculator" class="nav-dropdown-item" role="menuitem">
+                        <span class="item-icon"><i class="fas fa-calendar-alt"></i></span>
+                        <span class="item-text">Age Calculator</span>
+                    </a>
+                    <a href="/#bmi-calculator" class="nav-dropdown-item" role="menuitem">
+                        <span class="item-icon"><i class="fas fa-weight"></i></span>
+                        <span class="item-text">BMI Calculator</span>
+                    </a>
+                    <a href="/#emi-calculator" class="nav-dropdown-item" role="menuitem">
+                        <span class="item-icon"><i class="fas fa-coins"></i></span>
+                        <span class="item-text">EMI Calculator</span>
+                    </a>
+                    <a href="/#sip-calculator" class="nav-dropdown-item" role="menuitem">
+                        <span class="item-icon"><i class="fas fa-chart-line"></i></span>
+                        <span class="item-text">SIP Calculator</span>
+                    </a>
+                </div>
             </div>
         </div>
 
-        <div class="nav-dropdown">
-            <a href="#" class="nav-link">Image Tools</a>
-            <div class="nav-dropdown-content">
-                <a href="/#image-converter" class="nav-dropdown-item">Image Converter</a>
-                <a href="/#image-compressor" class="nav-dropdown-item">Image Compressor</a>
-                <a href="/#image-cropper" class="nav-dropdown-item">Image Cropper</a>
-                <a href="/#qr-generator" class="nav-dropdown-item">QR Generator</a>
+        <div class="nav-section">
+            <div class="nav-dropdown">
+                <a href="#" class="nav-link" aria-haspopup="true">
+                    <span class="nav-icon"><i class="fas fa-images"></i></span>
+                    <span class="nav-text">Image Tools</span>
+                    <span class="dropdown-arrow"><i class="fas fa-chevron-down"></i></span>
+                </a>
+                <div class="nav-dropdown-content" role="menu">
+                    <a href="/#image-converter" class="nav-dropdown-item" role="menuitem">
+                        <span class="item-icon"><i class="fas fa-sync-alt"></i></span>
+                        <span class="item-text">Image Converter</span>
+                    </a>
+                    <a href="/#image-compressor" class="nav-dropdown-item" role="menuitem">
+                        <span class="item-icon"><i class="fas fa-compress-arrows-alt"></i></span>
+                        <span class="item-text">Image Compressor</span>
+                    </a>
+                    <a href="/#image-cropper" class="nav-dropdown-item" role="menuitem">
+                        <span class="item-icon"><i class="fas fa-crop-alt"></i></span>
+                        <span class="item-text">Image Cropper</span>
+                    </a>
+                    <a href="/#qr-generator" class="nav-dropdown-item" role="menuitem">
+                        <span class="item-icon"><i class="fas fa-qrcode"></i></span>
+                        <span class="item-text">QR Generator</span>
+                    </a>
+                </div>
             </div>
         </div>
 
-        <div class="nav-dropdown">
-            <a href="#" class="nav-link">Media Tools</a>
-            <div class="nav-dropdown-content">
-                <a href="/#video-converter" class="nav-dropdown-item">Video Converter</a>
-                <a href="/#audio-converter" class="nav-dropdown-item">Audio Converter</a>
-                <a href="/#audio-trimmer" class="nav-dropdown-item">Audio Trimmer</a>
+        <div class="nav-section">
+            <div class="nav-dropdown">
+                <a href="#" class="nav-link" aria-haspopup="true">
+                    <span class="nav-icon"><i class="fas fa-music"></i></span>
+                    <span class="nav-text">Media Tools</span>
+                    <span class="dropdown-arrow"><i class="fas fa-chevron-down"></i></span>
+                </a>
+                <div class="nav-dropdown-content" role="menu">
+                    <a href="/#video-converter" class="nav-dropdown-item" role="menuitem">
+                        <span class="item-icon"><i class="fas fa-video"></i></span>
+                        <span class="item-text">Video Converter</span>
+                    </a>
+                    <a href="/#audio-converter" class="nav-dropdown-item" role="menuitem">
+                        <span class="item-icon"><i class="fas fa-file-audio"></i></span>
+                        <span class="item-text">Audio Converter</span>
+                    </a>
+                    <a href="/#audio-trimmer" class="nav-dropdown-item" role="menuitem">
+                        <span class="item-icon"><i class="fas fa-cut"></i></span>
+                        <span class="item-text">Audio Trimmer</span>
+                    </a>
+                </div>
             </div>
         </div>
 
-        <div class="nav-dropdown">
-            <a href="#" class="nav-link">Help & Info</a>
-            <div class="nav-dropdown-content">
-                <a href="/pages/about.html" class="nav-dropdown-item">About Us</a>
-                <a href="/pages/contact.html" class="nav-dropdown-item">Contact Us</a>
-                <a href="/pages/privacy.html" class="nav-dropdown-item">Privacy Policy</a>
+        <div class="nav-section">
+            <div class="nav-dropdown">
+                <a href="#" class="nav-link" aria-haspopup="true">
+                    <span class="nav-icon"><i class="fas fa-info-circle"></i></span>
+                    <span class="nav-text">Help & Info</span>
+                    <span class="dropdown-arrow"><i class="fas fa-chevron-down"></i></span>
+                </a>
+                <div class="nav-dropdown-content" role="menu">
+                    <a href="/pages/about.html" class="nav-dropdown-item" role="menuitem">
+                        <span class="item-icon"><i class="fas fa-users"></i></span>
+                        <span class="item-text">About Us</span>
+                    </a>
+                    <a href="/pages/contact.html" class="nav-dropdown-item" role="menuitem">
+                        <span class="item-icon"><i class="fas fa-envelope"></i></span>
+                        <span class="item-text">Contact Us</span>
+                    </a>
+                    <a href="/pages/privacy.html" class="nav-dropdown-item" role="menuitem">
+                        <span class="item-icon"><i class="fas fa-shield-alt"></i></span>
+                        <span class="item-text">Privacy Policy</span>
+                    </a>
+                </div>
             </div>
+        </div>
+
+        <div class="nav-section nav-theme-toggle">
+            <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle theme">
+                <span class="theme-icon"><i class="fas fa-moon"></i></span>
+            </button>
         </div>
     </nav>
 </div> 

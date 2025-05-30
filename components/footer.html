@@ -1,8 +1,161 @@
+<style>
+    .footer-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 3rem 1rem;
+    }
+    .footer-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 2rem;
+        margin-bottom: 2rem;
+    }
+    .footer-section h3 {
+        color: var(--accent-color);
+        margin-bottom: 1rem;
+        font-size: 1.2em;
+    }
+    .footer-links {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    .footer-links a {
+        color: var(--text-color);
+        text-decoration: none;
+        transition: color 0.2s ease;
+        opacity: 0.8;
+    }
+    .footer-links a:hover {
+        color: var(--accent-color);
+        opacity: 1;
+    }
+    .footer-social {
+        display: flex;
+        gap: 1rem;
+        margin-top: 1rem;
+    }
+    .footer-social a {
+        color: var(--text-color);
+        font-size: 1.5em;
+        opacity: 0.8;
+        transition: all 0.2s ease;
+    }
+    .footer-social a:hover {
+        color: var(--accent-color);
+        opacity: 1;
+        transform: translateY(-2px);
+    }
+    .footer-bottom {
+        text-align: center;
+        padding-top: 2rem;
+        margin-top: 2rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    .footer-bottom p {
+        color: var(--text-color);
+        opacity: 0.8;
+        font-size: 0.9em;
+    }
+    .footer-description {
+        color: var(--text-color);
+        opacity: 0.8;
+        line-height: 1.6;
+        margin-bottom: 1rem;
+    }
+</style>
+
 <div class="footer-content">
-    <div class="footer-links">
-        <a href="/pages/about.html">About Us</a>
-        <a href="/pages/contact.html">Contact Us</a>
-        <a href="/pages/privacy.html">Privacy Policy</a>
+    <div class="footer-grid">
+        <div class="footer-section">
+            <h3>About QuickTools</h3>
+            <p class="footer-description">
+                Your one-stop platform for free online utilities. Fast, secure, and always free. 
+                Built with modern web technologies for the best user experience.
+            </p>
+            <div class="footer-social">
+                <a href="https://github.com/yourusername/quicktools" target="_blank" title="GitHub">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://twitter.com/quicktoolshub" target="_blank" title="Twitter">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="https://linkedin.com/company/quicktools" target="_blank" title="LinkedIn">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="https://discord.gg/quicktools" target="_blank" title="Join our Discord">
+                    <i class="fab fa-discord"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="footer-section">
+            <h3>Popular Tools</h3>
+            <div class="footer-links">
+                <a href="#qr-generator"><i class="fas fa-qrcode"></i> QR Code Generator</a>
+                <a href="#json-formatter"><i class="fas fa-code"></i> JSON Formatter</a>
+                <a href="#word-counter"><i class="fas fa-font"></i> Word Counter</a>
+                <a href="#text-to-speech"><i class="fas fa-volume-up"></i> Text to Speech</a>
+                <a href="#unit-converter"><i class="fas fa-ruler-combined"></i> Unit Converter</a>
+            </div>
+        </div>
+
+        <div class="footer-section">
+            <h3>Quick Links</h3>
+            <div class="footer-links">
+                <a href="/pages/about.html"><i class="fas fa-info-circle"></i> About Us</a>
+                <a href="/pages/contact.html"><i class="fas fa-envelope"></i> Contact Us</a>
+                <a href="/pages/privacy.html"><i class="fas fa-shield-alt"></i> Privacy Policy</a>
+                <a href="/pages/terms.html"><i class="fas fa-gavel"></i> Terms of Use</a>
+                <a href="/pages/faq.html"><i class="fas fa-question-circle"></i> FAQ</a>
+            </div>
+        </div>
+
+        <div class="footer-section">
+            <h3>Newsletter</h3>
+            <p class="footer-description">
+                Subscribe to our newsletter for updates on new tools and features.
+            </p>
+            <form class="newsletter-form" onsubmit="return false;">
+                <div style="display: flex; gap: 0.5rem;">
+                    <input type="email" placeholder="Enter your email" style="
+                        flex: 1;
+                        padding: 0.75rem;
+                        border: 1px solid rgba(255, 255, 255, 0.1);
+                        border-radius: var(--border-radius-lg);
+                        background: var(--bg-color);
+                        color: var(--text-color);
+                        font-size: 0.9em;
+                    ">
+                    <button type="submit" style="
+                        padding: 0.75rem 1.5rem;
+                        background: var(--accent-color);
+                        color: white;
+                        border: none;
+                        border-radius: var(--border-radius-lg);
+                        cursor: pointer;
+                        transition: all 0.3s ease;
+                    ">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
-    <p>© <span id="current-year"></span> QuickTools Hub. All rights reserved.</p>
-</div> 
+
+    <div class="footer-bottom">
+        <p>
+            © <span id="current-year"></span> QuickTools Hub. All rights reserved. 
+            Made with <span class="heart"><i class="fas fa-heart"></i></span> for the developer community.
+        </p>
+        <p style="margin-top: 0.5rem; font-size: 0.8em;">
+            QuickTools Hub is not affiliated with any third-party tool or service. 
+            All trademarks belong to their respective owners.
+        </p>
+    </div>
+</div>
+
+<script>
+    // Set current year
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+</script> 

@@ -99,26 +99,81 @@ export function init() {
       disabledBtn: `
         opacity: 0.5;
         cursor: not-allowed;
+      `,
+      seoContent: `
+        margin-bottom: 2rem;
+        color: var(--text-color);
+        line-height: 1.6;
+      `,
+      heading: `
+        color: var(--text-color);
+        margin-bottom: 1rem;
+        font-size: 1.5em;
+      `,
+      subheading: `
+        color: var(--text-color);
+        margin: 1rem 0;
+        font-size: 1.2em;
+      `,
+      paragraph: `
+        margin-bottom: 1rem;
+        color: var(--text-color);
+        line-height: 1.6;
+      `,
+      featureList: `
+        list-style: disc;
+        margin-left: 1.5rem;
+        margin-bottom: 1rem;
+      `,
+      featureItem: `
+        margin-bottom: 0.5rem;
+        color: var(--text-color);
       `
     };
   
     contentDiv.innerHTML = `
       <div style="${styles.container}">
+        <div style="${styles.seoContent}">
+          <h1 style="${styles.heading}">Text to Speech Converter</h1>
+          <p style="${styles.paragraph}">
+            Convert any text into natural-sounding speech with our advanced text-to-speech tool. 
+            Perfect for creating voiceovers, learning pronunciation, assisting visually impaired users, 
+            or simply converting written content into audio format.
+          </p>
+          
+          <h2 style="${styles.subheading}">Key Features</h2>
+          <ul style="${styles.featureList}">
+            <li style="${styles.featureItem}">Multiple voice options with different accents and languages</li>
+            <li style="${styles.featureItem}">Adjustable speech rate and pitch controls</li>
+            <li style="${styles.featureItem}">Real-time preview with play, pause, and stop controls</li>
+            <li style="${styles.featureItem}">Support for long text passages</li>
+            <li style="${styles.featureItem}">Easy-to-use interface with instant feedback</li>
+          </ul>
+
+          <h2 style="${styles.subheading}">How to Use</h2>
+          <p style="${styles.paragraph}">
+            Type or paste your text into the input area below. Select your preferred voice from the 
+            dropdown menu. Adjust the rate and pitch sliders to customize the speech output. Use the 
+            playback controls to start, pause, or stop the speech. The tool will automatically handle 
+            punctuation and formatting for natural-sounding speech.
+          </p>
+        </div>
+
         <textarea
           id="text-input"
           placeholder="Type or paste text to convert to speech..."
           style="${styles.textarea}"
-          aria-label="Text input for speech synthesis"
+          aria-label="Text to convert to speech"
         ></textarea>
         <div style="${styles.controlsGrid}">
           <div style="${styles.controlGroup}">
-            <label for="voice-select" style="${styles.label}">Voice</label>
-            <select id="voice-select" style="${styles.select}" aria-live="polite" aria-busy="true">
+            <label style="${styles.label}">Voice</label>
+            <select id="voice-select" style="${styles.select}" aria-label="Select voice">
               <option value="">Loading voices...</option>
             </select>
           </div>
           <div style="${styles.controlGroup}">
-            <label for="rate" style="${styles.label}">
+            <label style="${styles.label}">
               Rate: <span id="rate-value" style="${styles.rangeValue}">1</span>
             </label>
             <input
@@ -129,12 +184,9 @@ export function init() {
               value="1"
               step="0.1"
               style="${styles.range}"
-              aria-valuemin="0.5"
-              aria-valuemax="2"
-              aria-valuenow="1"
               aria-label="Speech rate"
             >
-            <label for="pitch" style="${styles.label}">
+            <label style="${styles.label}">
               Pitch: <span id="pitch-value" style="${styles.rangeValue}">1</span>
             </label>
             <input
@@ -145,26 +197,48 @@ export function init() {
               value="1"
               step="0.1"
               style="${styles.range}"
-              aria-valuemin="0.5"
-              aria-valuemax="2"
-              aria-valuenow="1"
               aria-label="Speech pitch"
             >
           </div>
         </div>
         <div style="${styles.buttonGroup}">
-          <button id="play-btn" style="${styles.button}${styles.primaryBtn}" aria-pressed="false">
-            <span class="icon" aria-hidden="true">▶️</span> Play
+          <button id="play-btn" style="${styles.button}${styles.primaryBtn}">
+            <span class="icon">▶️</span> Play
           </button>
           <button id="pause-btn" style="${styles.button}${styles.secondaryBtn}" disabled>
-            <span class="icon" aria-hidden="true">⏸️</span> Pause
+            <span class="icon">⏸️</span> Pause
           </button>
           <button id="stop-btn" style="${styles.button}${styles.dangerBtn}" disabled>
-            <span class="icon" aria-hidden="true">⏹️</span> Stop
+            <span class="icon">⏹️</span> Stop
           </button>
           <button id="clear-btn" style="${styles.button}${styles.dangerBtn}">
-            <span class="icon" aria-hidden="true">🗑️</span> Clear
+            <span class="icon">🗑️</span> Clear
           </button>
+        </div>
+
+        <div style="${styles.seoContent}">
+          <h2 style="${styles.subheading}">About Text-to-Speech Technology</h2>
+          <p style="${styles.paragraph}">
+            Text-to-speech (TTS) technology converts written text into natural-sounding speech using 
+            advanced speech synthesis algorithms. This technology has numerous applications, from 
+            accessibility tools for visually impaired users to creating audio content for learning 
+            materials and podcasts.
+          </p>
+          <p style="${styles.paragraph}">
+            Our text-to-speech converter uses your browser's built-in speech synthesis capabilities, 
+            offering multiple voices and languages. The tool provides fine-grained control over speech 
+            parameters like rate and pitch, allowing you to customize the output to your needs. Whether 
+            you're creating accessible content, learning a new language, or just need to listen to text 
+            instead of reading it, this tool makes it easy to convert text to natural-sounding speech.
+          </p>
+
+          <h2 style="${styles.subheading}">Tips for Best Results</h2>
+          <p style="${styles.paragraph}">
+            For the most natural-sounding speech, try to use proper punctuation in your text. 
+            Experiment with different voices and speech rates to find the perfect combination for your 
+            needs. If you're using the tool for learning purposes, try following along with the text 
+            as it's being spoken to improve comprehension and pronunciation.
+          </p>
         </div>
       </div>
     `;

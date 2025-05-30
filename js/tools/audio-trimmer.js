@@ -25,7 +25,7 @@ export function init() {
             <div class="audio-trimmer-controls">
                 <div class="audio-trimmer-player-container">
                     <audio id="audio-trimmer-player" controls></audio>
-                </div>
+                    </div>
                 <div class="audio-trimmer-time-controls">
                     <label>
                         Start Time
@@ -37,7 +37,7 @@ export function init() {
                         <input type="range" id="audio-trimmer-end-time" min="0" value="0" step="0.1">
                         <span id="audio-trimmer-end-display" class="audio-trimmer-time-display">0:00</span>
                     </label>
-                </div>
+                    </div>
                 <div class="audio-trimmer-button-group">
                     <button id="audio-trimmer-preview-btn" class="audio-trimmer-button secondary">
                         <span class="icon">👂</span> Preview
@@ -66,8 +66,8 @@ export function init() {
     const loading = contentDiv.querySelector(".audio-trimmer-loading");
 
     // Format time in MM:SS format
-    function formatTime(seconds) {
-        const minutes = Math.floor(seconds / 60);
+        function formatTime(seconds) {
+            const minutes = Math.floor(seconds / 60);
         const secs = Math.floor(seconds % 60);
         return `${minutes}:${secs.toString().padStart(2, '0')}`;
     }
@@ -131,8 +131,8 @@ export function init() {
 
         if (start >= end) {
             showToast("Start time must be less than end time.", "error");
-            return;
-        }
+                    return;
+                }
 
         audio.currentTime = start;
         audio.play();
