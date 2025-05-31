@@ -19,7 +19,7 @@
 
         .faq-category {
             margin-bottom: 3rem;
-            background: white;
+            background: var(--tool-card-bg);
             border-radius: var(--border-radius-lg);
             padding: 2rem;
             box-shadow: var(--soft-box-shadow);
@@ -42,36 +42,78 @@
 
         .faq-item {
             margin-bottom: 1.5rem;
-            padding-bottom: 1.5rem;
-            border-bottom: 1px solid rgba(0, 184, 148, 0.1);
+            padding: 1.5rem;
+            border-radius: var(--border-radius-lg);
+            background: var(--bg-color);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s ease;
+            cursor: pointer;
         }
 
-        .faq-item:last-child {
-            margin-bottom: 0;
-            padding-bottom: 0;
-            border-bottom: none;
+        .faq-item:hover {
+            transform: translateY(-2px);
+            border-color: var(--accent-color);
+            background: var(--bg-color);
+        }
+
+        .faq-item.active {
+            background: var(--bg-color);
+            border-color: var(--accent-color);
+            box-shadow: 0 4px 12px rgba(0, 184, 148, 0.1);
         }
 
         .faq-question {
             font-size: 1.2rem;
             font-weight: 600;
-            color: var(--text-color);
-            margin-bottom: 0.75rem;
+            color: var(--heading-color);
             display: flex;
-            align-items: flex-start;
-            gap: 0.75rem;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+        }
+
+        .faq-item:hover .faq-question {
+            color: var(--text-color);
+        }
+
+        .faq-item.active .faq-question {
+            color: var(--accent-color);
         }
 
         .faq-question i {
             color: var(--accent-color);
-            margin-top: 0.25rem;
+            font-size: 1rem;
+            transition: transform 0.3s ease;
+            opacity: 0.8;
+        }
+
+        .faq-item:hover .faq-question i {
+            opacity: 1;
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+            opacity: 1;
         }
 
         .faq-answer {
             color: var(--text-color);
             line-height: 1.6;
-            padding-left: 2rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+            display: none;
             opacity: 0.9;
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .faq-answer ul {
@@ -100,11 +142,12 @@
         .faq-search input {
             width: 100%;
             padding: 1rem 1rem 1rem 3rem;
-            border: 2px solid rgba(0, 184, 148, 0.1);
+            border: 2px solid var(--border-color);
             border-radius: var(--border-radius-lg);
             font-size: 1rem;
             transition: all 0.3s ease;
-            background: white;
+            background: var(--bg-color);
+            color: var(--text-color);
         }
 
         .faq-search input:focus {
@@ -126,9 +169,9 @@
             text-align: center;
             margin-top: 3rem;
             padding: 2rem;
-            background: linear-gradient(135deg, var(--bg-color) 0%, #f1f5f9 100%);
+            background: var(--tool-card-bg);
             border-radius: var(--border-radius-lg);
-            border: 1px solid rgba(0, 184, 148, 0.1);
+            border: var(--card-border);
         }
 
         .still-have-questions h2 {
@@ -184,110 +227,144 @@
     <main>
         <section class="page-content">
             <div class="container">
-                <h1>Frequently Asked Questions</h1>
-
                 <div class="faq-container">
-                    <div class="faq-search">
-                        <i class="fas fa-search"></i>
-                        <input type="text" id="faqSearch" placeholder="Search frequently asked questions...">
+                    <!-- FAQ Header -->
+                    <div class="faq-header">
+                        <h1>Frequently Asked Questions</h1>
+                        <p>Find answers to common questions about QuickTools Hub and our online tools. Can't find what you're looking for? Feel free to contact us.</p>
                     </div>
 
-                    <div class="faq-category">
+                    <!-- FAQ Search -->
+                    <div class="faq-search">
+                        <div class="faq-search-wrapper">
+                            <i class="fas fa-search"></i>
+                            <input type="text" id="faqSearch" placeholder="Search for answers...">
+                        </div>
+                    </div>
+
+                    <!-- FAQ Category Navigation -->
+                    <div class="faq-categories">
+                        <button class="faq-category-btn active" data-category="all">
+                            <i class="fas fa-th-large"></i> All Questions
+                        </button>
+                        <button class="faq-category-btn" data-category="general">
+                            <i class="fas fa-info-circle"></i> General
+                        </button>
+                        <button class="faq-category-btn" data-category="tools">
+                            <i class="fas fa-tools"></i> Tools
+                        </button>
+                        <button class="faq-category-btn" data-category="technical">
+                            <i class="fas fa-laptop-code"></i> Technical
+                        </button>
+                        <button class="faq-category-btn" data-category="privacy">
+                            <i class="fas fa-shield-alt"></i> Privacy
+                        </button>
+                    </div>
+
+                    <!-- General Questions -->
+                    <div class="faq-category" data-category="general">
                         <h2><i class="fas fa-info-circle"></i> General Questions</h2>
                         <div class="faq-item">
                             <div class="faq-question">
-                                <i class="fas fa-question-circle"></i>
                                 <span>What is QuickTools Hub?</span>
+                                <i class="fas fa-chevron-down"></i>
                             </div>
                             <div class="faq-answer">
-                                QuickTools Hub is a free online platform offering a variety of web-based utilities and tools. Our tools are designed to help you with everyday tasks, from file conversions to calculations, all accessible directly in your browser.
-                            </div>
-                        </div>
-                        <div class="faq-item">
-                            <div class="faq-question">
-                                <i class="fas fa-question-circle"></i>
-                                <span>Do I need to create an account to use the tools?</span>
-                            </div>
-                            <div class="faq-answer">
-                                No, you don't need to create an account. All our tools are freely accessible without any registration requirements. Just visit the website and start using the tools immediately.
-                            </div>
-                        </div>
-                        <div class="faq-item">
-                            <div class="faq-question">
-                                <i class="fas fa-question-circle"></i>
-                                <span>Are the tools really free?</span>
-                            </div>
-                            <div class="faq-answer">
-                                Yes, all our tools are completely free to use. There are:
+                                <p>QuickTools Hub is a comprehensive online platform offering a variety of free web-based tools and utilities. Our platform is designed to help you with everyday tasks, providing:</p>
                                 <ul>
-                                    <li>No hidden charges</li>
-                                    <li>No premium features</li>
+                                    <li>File conversion and manipulation tools</li>
+                                    <li>Text and data processing utilities</li>
+                                    <li>Calculators and converters</li>
+                                    <li>Image and media tools</li>
+                                    <li>Developer utilities</li>
+                                </ul>
+                                <p>All tools are free, require no registration, and work directly in your browser.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <span>Do I need to create an account?</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>No, you don't need to create an account to use our tools. All features are freely accessible without any registration requirements. Simply visit the website and start using the tools immediately.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <span>Are all tools really free?</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Yes, all our tools are completely free to use. We believe in providing accessible tools without any hidden costs:</p>
+                                <ul>
+                                    <li>No premium features or paywalls</li>
+                                    <li>No usage limits or restrictions</li>
                                     <li>No advertisements</li>
-                                    <li>No usage limits</li>
+                                    <li>No hidden charges</li>
                                 </ul>
                             </div>
                         </div>
                     </div>
 
-                    <div class="faq-category">
-                        <h2><i class="fas fa-shield-alt"></i> Privacy & Security</h2>
+                    <!-- Tools & Features -->
+                    <div class="faq-category" data-category="tools">
+                        <h2><i class="fas fa-tools"></i> Tools & Features</h2>
                         <div class="faq-item">
                             <div class="faq-question">
-                                <i class="fas fa-question-circle"></i>
-                                <span>How is my data handled?</span>
-                            </div>
-                            <div class="faq-answer">
-                                All processing happens locally in your browser. We don't upload your files to any server, ensuring complete privacy and security. Your data never leaves your device.
-                            </div>
-                        </div>
-                        <div class="faq-item">
-                            <div class="faq-question">
-                                <i class="fas fa-question-circle"></i>
-                                <span>Do you store any user information?</span>
-                            </div>
-                            <div class="faq-answer">
-                                We only collect anonymous usage statistics through Google Analytics to improve our service. We don't store any personal information or uploaded files.
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="faq-category">
-                        <h2><i class="fas fa-tools"></i> Using the Tools</h2>
-                        <div class="faq-item">
-                            <div class="faq-question">
-                                <i class="fas fa-question-circle"></i>
                                 <span>How do the tools work?</span>
+                                <i class="fas fa-chevron-down"></i>
                             </div>
                             <div class="faq-answer">
-                                Our tools use modern web technologies to process everything directly in your browser. This means:
+                                <p>Our tools use modern web technologies to process everything directly in your browser:</p>
                                 <ul>
-                                    <li>Instant results without waiting for server processing</li>
+                                    <li>Instant results without server delays</li>
                                     <li>Works offline for many tools</li>
-                                    <li>No need to install any software</li>
+                                    <li>No software installation needed</li>
                                     <li>Compatible with all modern browsers</li>
                                 </ul>
                             </div>
                         </div>
                         <div class="faq-item">
                             <div class="faq-question">
-                                <i class="fas fa-question-circle"></i>
                                 <span>Are there any file size limits?</span>
+                                <i class="fas fa-chevron-down"></i>
                             </div>
                             <div class="faq-answer">
-                                File size limits depend on your browser and device memory. Since all processing happens locally, larger files may take longer to process. We recommend keeping files under 100MB for optimal performance.
+                                <p>File size limits depend on your browser and device memory. Since all processing happens locally:</p>
+                                <ul>
+                                    <li>Recommended maximum file size: 100MB</li>
+                                    <li>Larger files may take longer to process</li>
+                                    <li>Processing speed depends on your device's capabilities</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <span>Can I use the tools on mobile devices?</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Yes, our tools are fully responsive and work on all devices:</p>
+                                <ul>
+                                    <li>Mobile-friendly interface</li>
+                                    <li>Touch-optimized controls</li>
+                                    <li>Adaptive layouts for different screen sizes</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
 
-                    <div class="faq-category">
-                        <h2><i class="fas fa-desktop"></i> Technical Requirements</h2>
+                    <!-- Technical Questions -->
+                    <div class="faq-category" data-category="technical">
+                        <h2><i class="fas fa-laptop-code"></i> Technical Questions</h2>
                         <div class="faq-item">
                             <div class="faq-question">
-                                <i class="fas fa-question-circle"></i>
-                                <span>What browsers are supported?</span>
+                                <span>Which browsers are supported?</span>
+                                <i class="fas fa-chevron-down"></i>
                             </div>
                             <div class="faq-answer">
-                                Our tools work on all modern browsers including:
+                                <p>Our tools work on all modern browsers including:</p>
                                 <ul>
                                     <li>Google Chrome (recommended)</li>
                                     <li>Mozilla Firefox</li>
@@ -295,20 +372,68 @@
                                     <li>Safari</li>
                                     <li>Opera</li>
                                 </ul>
-                                We recommend keeping your browser updated for the best experience.
+                                <p>We recommend keeping your browser updated for the best experience.</p>
                             </div>
                         </div>
                         <div class="faq-item">
                             <div class="faq-question">
-                                <i class="fas fa-question-circle"></i>
-                                <span>Do I need to install anything?</span>
+                                <span>Do I need to install any software?</span>
+                                <i class="fas fa-chevron-down"></i>
                             </div>
                             <div class="faq-answer">
-                                No installation is required. All tools run directly in your web browser without any additional software or plugins.
+                                <p>No installation is required. All tools run directly in your web browser:</p>
+                                <ul>
+                                    <li>No downloads needed</li>
+                                    <li>No plugins required</li>
+                                    <li>No system modifications</li>
+                                </ul>
                             </div>
                         </div>
                     </div>
 
+                    <!-- Privacy & Security -->
+                    <div class="faq-category" data-category="privacy">
+                        <h2><i class="fas fa-shield-alt"></i> Privacy & Security</h2>
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <span>How is my data handled?</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Your privacy is our priority. All processing happens locally in your browser:</p>
+                                <ul>
+                                    <li>No data is uploaded to our servers</li>
+                                    <li>Files remain on your device</li>
+                                    <li>No personal information collected</li>
+                                    <li>No tracking beyond basic analytics</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <span>Is my data secure?</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Yes, your data is secure because:</p>
+                                <ul>
+                                    <li>All processing is done locally</li>
+                                    <li>No data is stored on our servers</li>
+                                    <li>We use HTTPS for secure connections</li>
+                                    <li>We follow best security practices</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- No Results Message -->
+                    <div class="faq-no-results">
+                        <i class="fas fa-search"></i>
+                        <h3>No Matching Questions Found</h3>
+                        <p>Try using different keywords or browse through our categories. If you still can't find what you're looking for, feel free to contact us.</p>
+                    </div>
+
+                    <!-- Still Have Questions -->
                     <div class="still-have-questions">
                         <h2>Still Have Questions?</h2>
                         <p>Can't find the answer you're looking for? We're here to help!</p>
@@ -328,19 +453,75 @@
 
     <script type="module" src="../js/main.js"></script>
     <script>
-        // FAQ Search Functionality
-        document.getElementById('faqSearch').addEventListener('input', function(e) {
-            const searchText = e.target.value.toLowerCase();
-            const faqItems = document.querySelectorAll('.faq-item');
-            
-            faqItems.forEach(item => {
-                const question = item.querySelector('.faq-question').textContent.toLowerCase();
-                const answer = item.querySelector('.faq-answer').textContent.toLowerCase();
-                
-                if (question.includes(searchText) || answer.includes(searchText)) {
-                    item.style.display = 'block';
-                } else {
-                    item.style.display = 'none';
+        document.addEventListener('DOMContentLoaded', function() {
+            // FAQ Items Click Handling
+            document.querySelectorAll('.faq-item').forEach(item => {
+                item.addEventListener('click', () => {
+                    const wasActive = item.classList.contains('active');
+                    
+                    // Close all other items
+                    document.querySelectorAll('.faq-item.active').forEach(activeItem => {
+                        if (activeItem !== item) {
+                            activeItem.classList.remove('active');
+                        }
+                    });
+
+                    // Toggle current item
+                    item.classList.toggle('active', !wasActive);
+                });
+            });
+
+            // Category Filtering
+            const categoryButtons = document.querySelectorAll('.faq-category-btn');
+            const faqCategories = document.querySelectorAll('.faq-category');
+
+            categoryButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const category = button.dataset.category;
+
+                    // Update active button
+                    categoryButtons.forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+
+                    // Show/hide categories
+                    faqCategories.forEach(cat => {
+                        if (category === 'all' || cat.dataset.category === category) {
+                            cat.style.display = 'block';
+                        } else {
+                            cat.style.display = 'none';
+                        }
+                    });
+                });
+            });
+
+            // Search Functionality
+            const searchInput = document.getElementById('faqSearch');
+            const noResults = document.querySelector('.faq-no-results');
+
+            searchInput.addEventListener('input', () => {
+                const searchText = searchInput.value.toLowerCase();
+                let hasResults = false;
+
+                document.querySelectorAll('.faq-item').forEach(item => {
+                    const question = item.querySelector('.faq-question').textContent.toLowerCase();
+                    const answer = item.querySelector('.faq-answer').textContent.toLowerCase();
+                    
+                    if (question.includes(searchText) || answer.includes(searchText)) {
+                        item.style.display = 'block';
+                        hasResults = true;
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+
+                // Show/hide no results message
+                noResults.classList.toggle('show', !hasResults);
+
+                // Show all categories during search
+                if (searchText) {
+                    faqCategories.forEach(cat => cat.style.display = 'block');
+                    categoryButtons.forEach(btn => btn.classList.remove('active'));
+                    categoryButtons[0].classList.add('active');
                 }
             });
         });

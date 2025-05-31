@@ -14,26 +14,49 @@ document.addEventListener('DOMContentLoaded', async () => {
     const homeContentContainer = document.getElementById('home-content-container');
 
     const tools = [
+        // Most used document & text tools
         { id: 'qr-generator', name: 'QR Code Generator', description: 'Generate QR codes from text or URLs.', icon: '<i class="fas fa-qrcode"></i>' },
-        { id: 'password-generator', name: 'Password Generator', description: 'Create strong, secure passwords.', icon: '<i class="fas fa-key"></i>' },
+        { id: 'barcode-generator', name: 'Barcode Generator', description: 'Create barcodes for products, ISBN, UPC, EAN-13, Code 128, and more.', icon: '<i class="fas fa-barcode"></i>', externalUrl: 'https://qrcodegeneratorpro.netlify.app/barcode' },
+        
+        { id: 'word-counter', name: 'Word Counter', description: 'Count words, characters, reading time.', icon: '<i class="fas fa-font"></i>' },
+        { id: 'text-case-converter', name: 'Text Case Converter', description: 'Convert text between different cases.', icon: '<i class="fas fa-text-height"></i>' },
+        { id: 'json-formatter', name: 'JSON Formatter', description: 'Format, validate, and beautify JSON.', icon: '<i class="fas fa-code"></i>' },
+        { id: 'csv-to-json-converter', name: 'CSV to JSON', description: 'Convert CSV data to JSON format.', icon: '<i class="fas fa-file-code"></i>' },
+        { id: 'markdown-editor', name: 'Markdown Editor', description: 'Write and preview markdown with live preview.', icon: '<i class="fas fa-edit"></i>' },
+        { id: 'regex-tester', name: 'Regex Tester', description: 'Test and validate regular expressions.', icon: '<i class="fas fa-search"></i>' },
+        
+        
+        // Image & media tools
         { id: 'image-converter', name: 'Image Converter', description: 'Convert images between JPG, PNG, WEBP.', icon: '<i class="fas fa-images"></i>' },
         { id: 'image-compressor', name: 'Image Compressor', description: 'Reduce image file size (JPG/WEBP).', icon: '<i class="fas fa-compress-arrows-alt"></i>' },
+        { id: 'image-metadata-remover', name: 'Image Metadata Remover', description: 'Remove EXIF data and preview image.', icon: '<i class="fas fa-user-shield"></i>' },
         { id: 'image-cropper', name: 'Image Cropper', description: 'Crop images (basic implementation).', icon: '<i class="fas fa-crop-alt"></i>' },
         { id: 'video-converter', name: 'Video Converter', description: 'Browser limitations apply. Can record.', icon: '<i class="fas fa-video"></i>' },
         { id: 'audio-converter', name: 'Audio Converter', description: 'Convert audio (e.g., MP3 to WAV).', icon: '<i class="fas fa-file-audio"></i>' },
         { id: 'audio-trimmer', name: 'Audio Trimmer', description: 'Trim audio clips (WAV output).', icon: '<i class="fas fa-cut"></i>' },
-        { id: 'age-calculator', name: 'Age Calculator', description: 'Calculate age from date of birth.', icon: '<i class="fas fa-calendar-alt"></i>' },
+        
+        // Calculators & converters
+        { id: 'unit-converter', name: 'Unit Converter', description: 'Convert length, weight, temperature.', icon: '<i class="fas fa-ruler-combined"></i>' },
+        { id: 'gratuity-calculator', name: 'Gratuity Calculator', description: 'Calculate tips and split bills easily.', icon: '<i class="fas fa-hand-holding-usd"></i>' },
         { id: 'emi-calculator', name: 'EMI Calculator', description: 'Calculate Equated Monthly Installments.', icon: '<i class="fas fa-calculator"></i>' },
         { id: 'sip-calculator', name: 'SIP Calculator', description: 'Estimate returns on Systematic Investments.', icon: '<i class="fas fa-chart-line"></i>' },
-        { id: 'word-counter', name: 'Word Counter', description: 'Count words, characters, reading time.', icon: '<i class="fas fa-font"></i>' },
+        { id: 'age-calculator', name: 'Age Calculator', description: 'Calculate age from date of birth.', icon: '<i class="fas fa-calendar-alt"></i>' },
+        { id: 'bmi-calculator', name: 'BMI Calculator', description: 'Calculate Body Mass Index.', icon: '<i class="fas fa-weight"></i>' },
+        { id: 'calorie-calculator', name: 'Calorie Calculator', description: 'Calculate daily calorie needs and macros.', icon: '<i class="fas fa-utensils"></i>' },
+        { id: 'gst-calculator', name: 'GST Calculator', description: 'Calculate GST, CGST, and SGST amounts.', icon: '<i class="fas fa-receipt"></i>' },
+        { id: 'freelance-calculator', name: 'Freelance Calculator', description: 'Calculate daily and hourly income rates.', icon: '<i class="fas fa-money-bill-wave"></i>' },
+        
+        // Security & utility tools
+        { id: 'password-generator', name: 'Password Generator', description: 'Create strong, secure passwords.', icon: '<i class="fas fa-key"></i>' },
         { id: 'base64-coder', name: 'Base64 Encoder/Decoder', description: 'Encode to or decode from Base64.', icon: '<i class="fas fa-exchange-alt"></i>' },
         { id: 'color-picker', name: 'Color Picker', description: 'Pick colors and get HEX, RGB, HSL values.', icon: '<i class="fas fa-palette"></i>' },
+        { id: 'color-contrast-checker', name: 'Color Contrast Checker', description: 'Check color contrast for accessibility (WCAG).', icon: '<i class="fas fa-adjust"></i>' },
+        { id: 'timer-stopwatch', name: 'Timer/Stopwatch', description: 'Simple timer and stopwatch.', icon: '<i class="fas fa-stopwatch"></i>' },
+        
+        // Speech tools
         { id: 'text-to-speech', name: 'Text to Speech', description: 'Convert text into spoken audio.', icon: '<i class="fas fa-volume-up"></i>' },
         { id: 'speech-to-text', name: 'Speech to Text', description: 'Convert spoken words into text.', icon: '<i class="fas fa-microphone"></i>' },
-        { id: 'json-formatter', name: 'JSON Formatter', description: 'Format, validate, and beautify JSON.', icon: '<i class="fas fa-code"></i>' },
-        { id: 'unit-converter', name: 'Unit Converter', description: 'Convert length, weight, temperature.', icon: '<i class="fas fa-ruler-combined"></i>' },
-        { id: 'bmi-calculator', name: 'BMI Calculator', description: 'Calculate Body Mass Index.', icon: '<i class="fas fa-weight"></i>' },
-        { id: 'timer-stopwatch', name: 'Timer/Stopwatch', description: 'Simple timer and stopwatch.', icon: '<i class="fas fa-stopwatch"></i>' }
+        { id: 'advanced-qr-generator', name: 'Advanced QR Code Generator', description: 'Create QR codes with custom logos, colors, and advanced styling options.', icon: '<i class="fas fa-qrcode"></i>', externalUrl: 'https://qrcodegeneratorpro.netlify.app/' }
     ];
 
     // --- Navigation and View Management ---
@@ -117,7 +140,11 @@ document.addEventListener('DOMContentLoaded', async () => {
             openButton.addEventListener('click', (e) => {
                 e.stopPropagation(); // Prevent card click event
                 console.log('Tool button clicked:', tool.id);
-                window.location.hash = tool.id;
+                if (tool.externalUrl) {
+                    window.open(tool.externalUrl, '_blank');
+                } else {
+                    window.location.hash = tool.id;
+                }
             });
             
             toolsGrid.appendChild(card);

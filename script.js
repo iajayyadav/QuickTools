@@ -22,7 +22,6 @@ document.addEventListener('DOMContentLoaded', () => {
         { id: 'emi-calculator', name: 'EMI Calculator', description: 'Calculate Equated Monthly Installments.', icon: '📈' },
         { id: 'sip-calculator', name: 'SIP Calculator', description: 'Estimate returns on Systematic Investments.', icon: '💰' },
         { id: 'word-counter', name: 'Word Counter', description: 'Count words, characters, reading time.', icon: '📝' },
-        { id: 'base64-coder', name: 'Base64 Encoder/Decoder', description: 'Encode to or decode from Base64.', icon: '🔄' },
         { id: 'color-picker', name: 'Color Picker', description: 'Pick colors and get HEX, RGB, HSL values.', icon: '🎨' },
         { id: 'text-to-speech', name: 'Text to Speech', description: 'Convert text into spoken audio.', icon: '🗣️' },
         { id: 'speech-to-text', name: 'Speech to Text', description: 'Convert spoken words into text.', icon: '🎤' },
@@ -494,68 +493,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 5. Base64 Encoder/Decoder
-    function initBase64Coder() {
-        const contentDiv = document.getElementById('base64-coder-content');
-        contentDiv.innerHTML = `
-            <div class="form-group">
-                <label for="b64-input">Input Text:</label>
-                <textarea id="b64-input" rows="5" placeholder="Enter text to encode or Base64 to decode"></textarea>
-            </div>
-            <div class="btn-group">
-                <button id="b64-encode-btn" class="btn">Encode to Base64</button>
-                <button id="b64-decode-btn" class="btn">Decode from Base64</button>
-            </div>
-            <div class="form-group" style="margin-top: 1rem;">
-                <label for="b64-output">Output:</label>
-                <textarea id="b64-output" rows="5" readonly style="background-color: var(--bg-color); border: 1px solid var(--header-bg);"></textarea>
-                 <button id="b64-copy-btn" class="btn" style="margin-top: 0.5rem;">Copy Output</button>
-            </div>
-        `;
-
-        const inputArea = document.getElementById('b64-input');
-        const outputArea = document.getElementById('b64-output');
-        const encodeBtn = document.getElementById('b64-encode-btn');
-        const decodeBtn = document.getElementById('b64-decode-btn');
-        const copyBtn = document.getElementById('b64-copy-btn');
-
-        encodeBtn.addEventListener('click', () => {
-            try {
-                // Handle UTF-8 characters correctly
-                const utf8Bytes = new TextEncoder().encode(inputArea.value);
-                let binaryString = '';
-                utf8Bytes.forEach(byte => binaryString += String.fromCharCode(byte));
-                outputArea.value = btoa(binaryString);
-            } catch (e) {
-                outputArea.value = 'Error: Could not encode input.';
-                showToast('Encoding error. Invalid characters?', 'error');
-            }
-        });
-
-        decodeBtn.addEventListener('click', () => {
-            try {
-                // Handle UTF-8 characters correctly
-                const binaryString = atob(inputArea.value);
-                const bytes = new Uint8Array(binaryString.length);
-                for (let i = 0; i < binaryString.length; i++) {
-                    bytes[i] = binaryString.charCodeAt(i);
-                }
-                outputArea.value = new TextDecoder().decode(bytes);
-            } catch (e) {
-                outputArea.value = 'Error: Invalid Base64 string.';
-                showToast('Decoding error. Invalid Base64?', 'error');
-            }
-        });
-        copyBtn.addEventListener('click', () => {
-            if (outputArea.value && !outputArea.value.startsWith('Error:')) {
-                navigator.clipboard.writeText(outputArea.value)
-                    .then(() => showToast('Output copied to clipboard!'))
-                    .catch(err => showToast('Failed to copy output.', 'error'));
-            }
-        });
-    }
-    
-    // 6. Color Picker
+    // 5. Color Picker
     function initColorPicker() {
         const contentDiv = document.getElementById('color-picker-content');
         contentDiv.innerHTML = `
@@ -629,7 +567,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 7. Text to Speech
+    // 6. Text to Speech
     function initTextToSpeech() {
         const contentDiv = document.getElementById('text-to-speech-content');
         contentDiv.innerHTML = `
@@ -722,7 +660,7 @@ document.addEventListener('DOMContentLoaded', () => {
         stopBtn.addEventListener('click', () => synth.cancel());
     }
 
-    // 8. Age Calculator
+    // 7. Age Calculator
     function initAgeCalculator() {
         const contentDiv = document.getElementById('age-calculator-content');
         contentDiv.innerHTML = `
@@ -776,7 +714,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 9. EMI Calculator
+    // 8. EMI Calculator
     function initEmiCalculator() {
         const contentDiv = document.getElementById('emi-calculator-content');
         contentDiv.innerHTML = `
@@ -838,7 +776,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 10. SIP Calculator
+    // 9. SIP Calculator
     function initSipCalculator() {
         const contentDiv = document.getElementById('sip-calculator-content');
         contentDiv.innerHTML = `
@@ -896,7 +834,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 11. Speech to Text
+    // 10. Speech to Text
     function initSpeechToText() {
         const contentDiv = document.getElementById('speech-to-text-content');
         contentDiv.innerHTML = `
@@ -977,7 +915,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 12. JSON Formatter
+    // 11. JSON Formatter
     function initJsonFormatter() {
         const contentDiv = document.getElementById('json-formatter-content');
         contentDiv.innerHTML = `
@@ -1016,7 +954,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 13. BMI Calculator
+    // 12. BMI Calculator
     function initBmiCalculator() {
         const contentDiv = document.getElementById('bmi-calculator-content');
         contentDiv.innerHTML = `
@@ -1066,7 +1004,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 14. Timer/Stopwatch
+    // 13. Timer/Stopwatch
     function initTimerStopwatch() {
         const contentDiv = document.getElementById('timer-stopwatch-content');
         contentDiv.innerHTML = `
@@ -1434,12 +1372,11 @@ document.addEventListener('DOMContentLoaded', () => {
         initEmiCalculator();        // 10
         initSipCalculator();        // 11
         initWordCounter();          // 12
-        initBase64Coder();          // 13
         initColorPicker();          // 14
         initTextToSpeech();         // 15
         initSpeechToText();         // 16
         initJsonFormatter();        // 17
-        initUnitConverter();        // 18 (Implemented basic length, weight, temp)
+        initUnitConverter();        // 18
         initBmiCalculator();        // 19
         initTimerStopwatch();       // 20
     }

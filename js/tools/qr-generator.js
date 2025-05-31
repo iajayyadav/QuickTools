@@ -51,6 +51,12 @@ export function init() {
 
     contentDiv.innerHTML = `
         <div class="qr-tool-container">
+            <div style="margin-bottom: 2rem; padding: 1rem; background: var(--tool-card-bg); border-radius: var(--border-radius-lg); text-align: center;">
+                <p style="margin-bottom: 1rem;">Need more advanced features? Try our enhanced QR Code Generator with custom logos, advanced styling, and more!</p>
+                <a href="https://qrcodegeneratorpro.netlify.app/" target="_blank" class="btn" style="background-color: var(--accent-color);">
+                    <i class="fas fa-external-link-alt"></i> Try Advanced QR Generator
+                </a>
+            </div>
             <div class="form-group">
                 <label for="qr-text">Text or URL:</label>
                 <input type="text" id="qr-text" placeholder="Enter text or URL">

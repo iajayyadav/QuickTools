@@ -86,11 +86,11 @@ export function initNav() {
 
     // Handle theme toggle
     function setupThemeToggle() {
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        let isDarkMode = localStorage.getItem('darkMode') === 'true' || prefersDark;
+        // Set light theme as default, ignoring system preference
+        let isDarkMode = localStorage.getItem('darkMode') === 'true';
 
         function updateTheme() {
-            document.documentElement.classList.toggle('dark-mode', isDarkMode);
+            document.documentElement.setAttribute('data-theme', isDarkMode ? 'dark' : 'light');
             const themeIcon = themeToggle.querySelector('.theme-icon i');
             themeIcon.classList.remove('fa-sun', 'fa-moon');
             themeIcon.classList.add(isDarkMode ? 'fa-sun' : 'fa-moon');

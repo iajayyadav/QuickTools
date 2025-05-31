@@ -1,18 +1,12 @@
 // Color Picker Tool
 import { showToast } from '../main.js';
 
-// Import styles
-const link = document.createElement('link');
-link.rel = 'stylesheet';
-link.href = 'css/color-picker.css';
-document.head.appendChild(link);
-
 let colorPicker;
 
 export function init() {
     console.log('Color Picker Tool: Initializing...');
     
-    // Wait for DOM and styles to be ready
+    // Wait for DOM to be ready
     if (document.readyState === 'loading') {
         document.addEventListener('DOMContentLoaded', initColorPicker);
     } else {
@@ -92,85 +86,77 @@ class ColorPicker {
         const container = document.getElementById('color-picker-content');
         if (!container) {
             console.error('ColorPicker: Could not find color-picker-content container');
-            // Try to find or create a fallback container
-            const fallbackContainer = document.querySelector('.tool-container') || document.body;
-            const newContainer = document.createElement('div');
-            newContainer.id = 'color-picker-content';
-            fallbackContainer.appendChild(newContainer);
-            console.log('ColorPicker: Created fallback container');
-            return this.initializeUI(); // Retry initialization
+            return;
         }
 
-        // Clear any existing content
-        container.innerHTML = '';
+        // Create a unique ID for scoped styling
+        const scopeId = 'color-picker-' + Math.random().toString(36).substr(2, 9);
+        container.setAttribute('data-scope', scopeId);
 
-        // Create the main container
-        const toolContainer = document.createElement('div');
-        toolContainer.className = 'tool-container color-picker-container';
-        
-        // Add the container structure
-        toolContainer.innerHTML = `
-            <div class="color-picker-grid">
+        // Clear any existing content
+        container.innerHTML = `
+            <div class="cp-container">
+                <div class="cp-grid">
                 <!-- Color Preview Section -->
-                <div class="color-preview-section">
-                    <div class="color-preview">
-                        <div id="colorPreview" class="preview-box"></div>
+                    <div class="cp-preview-section">
+                        <div class="cp-preview">
+                            <div id="colorPreview" class="cp-preview-box"></div>
                         <input type="color" id="colorPicker" value="#00b894">
                     </div>
-                    <div class="color-adjustments">
-                        <div class="adjustment-group">
+                        <div class="cp-adjustments">
+                            <div class="cp-adjustment-group">
                             <label for="hueSlider">Hue</label>
                             <input type="range" id="hueSlider" min="0" max="360" value="0">
-                            <span class="value-display">0°</span>
+                                <span class="cp-value-display">0°</span>
                         </div>
-                        <div class="adjustment-group">
+                            <div class="cp-adjustment-group">
                             <label for="saturationSlider">Saturation</label>
                             <input type="range" id="saturationSlider" min="0" max="100" value="100">
-                            <span class="value-display">100%</span>
+                                <span class="cp-value-display">100%</span>
                         </div>
-                        <div class="adjustment-group">
+                            <div class="cp-adjustment-group">
                             <label for="lightnessSlider">Lightness</label>
                             <input type="range" id="lightnessSlider" min="0" max="100" value="50">
-                            <span class="value-display">50%</span>
+                                <span class="cp-value-display">50%</span>
                         </div>
-                        <div class="adjustment-group">
+                            <div class="cp-adjustment-group">
                             <label for="alphaSlider">Opacity</label>
                             <input type="range" id="alphaSlider" min="0" max="100" value="100">
-                            <span class="value-display">100%</span>
+                                <span class="cp-value-display">100%</span>
                         </div>
                     </div>
                 </div>
 
                 <!-- Color Values Section -->
-                <div class="color-values-section">
+                    <div class="cp-values-section">
                     <h3>Color Values</h3>
-                    <div class="color-values">
-                        <div class="value-group">
+                        <div class="cp-values">
+                            <div class="cp-value-group">
                             <label>HEX</label>
-                            <div class="copy-input">
+                                <div class="cp-copy-input">
                                 <input type="text" id="hexValue" readonly>
-                                <button class="copy-btn" data-clipboard="hexValue">
-                                    <span class="tooltip">Copy</span>
+                                    <button class="cp-copy-btn" data-clipboard="hexValue">
+                                        <span class="cp-tooltip">Copy</span>
                                     📋
                                 </button>
                             </div>
                         </div>
-                        <div class="value-group">
+                            <div class="cp-value-group">
                             <label>RGB</label>
-                            <div class="copy-input">
+                                <div class="cp-copy-input">
                                 <input type="text" id="rgbValue" readonly>
-                                <button class="copy-btn" data-clipboard="rgbValue">
-                                    <span class="tooltip">Copy</span>
+                                    <button class="cp-copy-btn" data-clipboard="rgbValue">
+                                        <span class="cp-tooltip">Copy</span>
                                     📋
                                 </button>
                             </div>
                         </div>
-                        <div class="value-group">
+                            <div class="cp-value-group">
                             <label>HSL</label>
-                            <div class="copy-input">
+                                <div class="cp-copy-input">
                                 <input type="text" id="hslValue" readonly>
-                                <button class="copy-btn" data-clipboard="hslValue">
-                                    <span class="tooltip">Copy</span>
+                                    <button class="cp-copy-btn" data-clipboard="hslValue">
+                                        <span class="cp-tooltip">Copy</span>
                                     📋
                                 </button>
                             </div>
@@ -178,82 +164,325 @@ class ColorPicker {
                     </div>
 
                     <!-- Saved Colors -->
-                    <div class="color-palette">
+                        <div class="cp-palette">
                         <h3>Saved Colors</h3>
-                        <div id="savedColors" class="saved-colors"></div>
-                        <button id="saveColor" class="save-color-btn">Save Color</button>
+                            <div id="savedColors" class="cp-saved-colors"></div>
+                            <button id="saveColor" class="cp-save-btn">Save Color</button>
                     </div>
                 </div>
             </div>
 
             <!-- Color Harmonies -->
-            <div class="color-harmonies">
+                <div class="cp-harmonies">
                 <h3>Color Harmonies</h3>
-                 <div class="harmony-grid">
-                     <div class="harmony-group">
+                    <div class="cp-harmony-grid">
+                        <div class="cp-harmony-group">
                          <h4>Complementary</h4>
-                         <div id="complementaryColors" class="harmony-colors"></div>
+                            <div id="complementaryColors" class="cp-harmony-colors"></div>
                      </div>
-                     <div class="harmony-group">
+                        <div class="cp-harmony-group">
                          <h4>Analogous</h4>
-                         <div id="analogousColors" class="harmony-colors"></div>
+                            <div id="analogousColors" class="cp-harmony-colors"></div>
                      </div>
-                     <div class="harmony-group">
+                        <div class="cp-harmony-group">
                          <h4>Triadic</h4>
-                         <div id="triadicColors" class="harmony-colors"></div>
+                            <div id="triadicColors" class="cp-harmony-colors"></div>
+                        </div>
                      </div>
                  </div>
              </div>
-         </div>`;
 
-        // Add the container to the DOM
-        container.appendChild(toolContainer);
+            <style>
+                [data-scope="${scopeId}"] .cp-container {
+                    max-width: 1000px;
+                    margin: 0 auto;
+                    padding: 2rem;
+                }
 
-        // Verify the structure was created properly
-        const verifyElement = (id, type) => {
-            const element = document.getElementById(id);
-            if (!element) {
-                console.error(`ColorPicker: Missing ${type} element with id: ${id}`);
-                return false;
+                [data-scope="${scopeId}"] .cp-grid {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                    gap: 2rem;
+                    margin-bottom: 2rem;
+                }
+
+                [data-scope="${scopeId}"] .cp-preview-section {
+                    background: var(--tool-card-bg);
+                    padding: 1.5rem;
+                    border-radius: var(--border-radius-lg);
+                    box-shadow: var(--soft-box-shadow);
+                }
+
+                [data-scope="${scopeId}"] .cp-preview {
+                    display: flex;
+                    gap: 1rem;
+                    margin-bottom: 1.5rem;
+                }
+
+                [data-scope="${scopeId}"] .cp-preview-box {
+                    flex: 1;
+                    height: 100px;
+                    border-radius: var(--border-radius-lg);
+                    border: 2px solid var(--border-color);
+                    background: #00b894;
+                }
+
+                [data-scope="${scopeId}"] .cp-preview input[type="color"] {
+                    width: 60px;
+                    height: 100px;
+                    padding: 0;
+                    border: none;
+                    border-radius: var(--border-radius-lg);
+                    cursor: pointer;
+                }
+
+                [data-scope="${scopeId}"] .cp-adjustments {
+                    display: grid;
+                    gap: 1rem;
+                }
+
+                [data-scope="${scopeId}"] .cp-adjustment-group {
+                    display: grid;
+                    grid-template-columns: 80px 1fr 50px;
+                    align-items: center;
+                    gap: 1rem;
+                }
+
+                [data-scope="${scopeId}"] .cp-adjustment-group label {
+                    color: var(--text-color);
+                    font-size: 0.9rem;
+                }
+
+                [data-scope="${scopeId}"] .cp-adjustment-group input[type="range"] {
+                    width: 100%;
+                    height: 6px;
+                    -webkit-appearance: none;
+                    background: var(--border-color);
+                    border-radius: 3px;
+                    outline: none;
+                }
+
+                [data-scope="${scopeId}"] .cp-adjustment-group input[type="range"]::-webkit-slider-thumb {
+                    -webkit-appearance: none;
+                    width: 16px;
+                    height: 16px;
+                    background: var(--accent-color);
+                    border-radius: 50%;
+                    cursor: pointer;
+                    transition: transform 0.2s ease;
+                }
+
+                [data-scope="${scopeId}"] .cp-adjustment-group input[type="range"]::-webkit-slider-thumb:hover {
+                    transform: scale(1.2);
+                }
+
+                [data-scope="${scopeId}"] .cp-value-display {
+                    color: var(--text-color);
+                    font-size: 0.9rem;
+                    text-align: right;
+                }
+
+                [data-scope="${scopeId}"] .cp-values-section {
+                    background: var(--tool-card-bg);
+                    padding: 1.5rem;
+                    border-radius: var(--border-radius-lg);
+                    box-shadow: var(--soft-box-shadow);
+                }
+
+                [data-scope="${scopeId}"] .cp-values-section h3 {
+                    color: var(--text-color);
+                    margin-bottom: 1rem;
+                }
+
+                [data-scope="${scopeId}"] .cp-values {
+                    display: grid;
+                    gap: 1rem;
+                }
+
+                [data-scope="${scopeId}"] .cp-value-group {
+                    display: grid;
+                    gap: 0.5rem;
+                }
+
+                [data-scope="${scopeId}"] .cp-value-group label {
+                    color: var(--text-color);
+                    font-size: 0.9rem;
+                }
+
+                [data-scope="${scopeId}"] .cp-copy-input {
+                    display: flex;
+                    gap: 0.5rem;
+                }
+
+                [data-scope="${scopeId}"] .cp-copy-input input {
+                    flex: 1;
+                    padding: 0.5rem;
+                    border: 2px solid var(--border-color);
+                    border-radius: var(--border-radius-lg);
+                    background: var(--bg-color);
+                    color: var(--text-color);
+                    font-family: monospace;
+                }
+
+                [data-scope="${scopeId}"] .cp-copy-btn {
+                    padding: 0.5rem;
+                    border: none;
+                    border-radius: var(--border-radius-lg);
+                    background: var(--accent-color);
+                    color: white;
+                    cursor: pointer;
+                    position: relative;
+                    transition: all 0.3s ease;
+                }
+
+                [data-scope="${scopeId}"] .cp-copy-btn:hover {
+                    transform: translateY(-2px);
+                }
+
+                [data-scope="${scopeId}"] .cp-tooltip {
+                    position: absolute;
+                    bottom: 100%;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    padding: 0.25rem 0.5rem;
+                    background: var(--text-color);
+                    color: var(--bg-color);
+                    font-size: 0.8rem;
+                    border-radius: var(--border-radius-lg);
+                    opacity: 0;
+                    visibility: hidden;
+                    transition: all 0.3s ease;
+                }
+
+                [data-scope="${scopeId}"] .cp-copy-btn:hover .cp-tooltip {
+                    opacity: 1;
+                    visibility: visible;
+                    transform: translateX(-50%) translateY(-5px);
+                }
+
+                [data-scope="${scopeId}"] .cp-palette {
+                    margin-top: 2rem;
+                }
+
+                [data-scope="${scopeId}"] .cp-saved-colors {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
+                    gap: 0.5rem;
+                    margin-bottom: 1rem;
+                    min-height: 40px;
+                    padding: 0.5rem;
+                    border: 2px solid var(--border-color);
+                    border-radius: var(--border-radius-lg);
+                }
+
+                [data-scope="${scopeId}"] .cp-saved-color {
+                    width: 100%;
+                    aspect-ratio: 1;
+                    border-radius: var(--border-radius-lg);
+                    border: 2px solid var(--border-color);
+                    cursor: pointer;
+                    transition: transform 0.2s ease;
+                }
+
+                [data-scope="${scopeId}"] .cp-saved-color:hover {
+                    transform: scale(1.1);
+                }
+
+                [data-scope="${scopeId}"] .cp-save-btn {
+                    width: 100%;
+                    padding: 0.75rem;
+                    border: none;
+                    border-radius: var(--border-radius-lg);
+                    background: var(--accent-color);
+                    color: white;
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                }
+
+                [data-scope="${scopeId}"] .cp-save-btn:hover {
+                    transform: translateY(-2px);
+                    box-shadow: 0 4px 12px rgba(0, 184, 148, 0.2);
+                }
+
+                [data-scope="${scopeId}"] .cp-harmonies {
+                    background: var(--tool-card-bg);
+                    padding: 1.5rem;
+                    border-radius: var(--border-radius-lg);
+                    box-shadow: var(--soft-box-shadow);
+                }
+
+                [data-scope="${scopeId}"] .cp-harmonies h3 {
+                    color: var(--text-color);
+                    margin-bottom: 1rem;
+                }
+
+                [data-scope="${scopeId}"] .cp-harmony-grid {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                    gap: 1.5rem;
+                }
+
+                [data-scope="${scopeId}"] .cp-harmony-group h4 {
+                    color: var(--text-color);
+                    margin-bottom: 0.75rem;
+                    font-size: 0.9rem;
+                }
+
+                [data-scope="${scopeId}"] .cp-harmony-colors {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fit, minmax(40px, 1fr));
+                    gap: 0.5rem;
             }
-            return true;
-        };
 
-        const requiredElements = {
-            'colorPicker': 'color input',
-            'colorPreview': 'preview box',
-            'hexValue': 'HEX input',
-            'rgbValue': 'RGB input',
-            'hslValue': 'HSL input',
-            'hueSlider': 'hue slider',
-            'saturationSlider': 'saturation slider',
-            'lightnessSlider': 'lightness slider',
-            'alphaSlider': 'alpha slider'
-        };
+                [data-scope="${scopeId}"] .cp-harmony-color {
+                    width: 100%;
+                    aspect-ratio: 1;
+                    border-radius: var(--border-radius-lg);
+                    border: 2px solid var(--border-color);
+                    cursor: pointer;
+                    transition: transform 0.2s ease;
+                }
 
-        let allElementsPresent = true;
-        for (const [id, type] of Object.entries(requiredElements)) {
-            if (!verifyElement(id, type)) {
-                allElementsPresent = false;
-            }
+                [data-scope="${scopeId}"] .cp-harmony-color:hover {
+                    transform: scale(1.1);
+                }
+
+                @media (max-width: 768px) {
+                    [data-scope="${scopeId}"] .cp-container {
+                        padding: 1rem;
+                    }
+
+                    [data-scope="${scopeId}"] .cp-grid {
+                        grid-template-columns: 1fr;
+                    }
+
+                    [data-scope="${scopeId}"] .cp-preview {
+                        flex-direction: column;
+                    }
+
+                    [data-scope="${scopeId}"] .cp-preview input[type="color"] {
+                        width: 100%;
+                        height: 60px;
+                    }
+
+                    [data-scope="${scopeId}"] .cp-harmony-grid {
+                        grid-template-columns: 1fr;
         }
-
-        if (!allElementsPresent) {
-            console.error('ColorPicker: Some required elements are missing');
-            return;
-        }
+                }
+            </style>
+        `;
 
         // Store elements
         this.elements = {
             colorPicker: document.getElementById('colorPicker'),
             colorPreview: document.getElementById('colorPreview'),
+            hexValue: document.getElementById('hexValue'),
+            rgbValue: document.getElementById('rgbValue'),
+            hslValue: document.getElementById('hslValue'),
             hueSlider: document.getElementById('hueSlider'),
             saturationSlider: document.getElementById('saturationSlider'),
             lightnessSlider: document.getElementById('lightnessSlider'),
             alphaSlider: document.getElementById('alphaSlider'),
-            hexValue: document.getElementById('hexValue'),
-            rgbValue: document.getElementById('rgbValue'),
-            hslValue: document.getElementById('hslValue'),
             savedColors: document.getElementById('savedColors'),
             saveColorBtn: document.getElementById('saveColor'),
             complementaryColors: document.getElementById('complementaryColors'),
@@ -261,246 +490,179 @@ class ColorPicker {
             triadicColors: document.getElementById('triadicColors')
         };
 
-        console.log('ColorPicker: UI initialization completed');
+        // Verify all elements exist
+        for (const [key, element] of Object.entries(this.elements)) {
+            if (!element) {
+                console.error(`ColorPicker: Missing element: ${key}`);
+            }
+        }
     }
 
     setupEventListeners() {
-        if (!this.elements.colorPicker) return;
-
         // Color picker input
         this.elements.colorPicker.addEventListener('input', (e) => {
             const color = e.target.value;
-            const rgb = this.hexToRgb(color);
-            if (!rgb) return;
-            
-            const hsl = this.rgbToHsl(rgb.r, rgb.g, rgb.b);
-            
-            // Update sliders but preserve alpha value
-            this.elements.hueSlider.value = Math.round(hsl.h);
-            this.elements.saturationSlider.value = Math.round(hsl.s);
-            this.elements.lightnessSlider.value = Math.round(hsl.l);
-            
-            // Update display
-            this.updateFromSliders();
+            this.updateColor(color);
         });
 
         // Sliders
-        const sliders = [
-            this.elements.hueSlider,
-            this.elements.saturationSlider,
-            this.elements.lightnessSlider,
-            this.elements.alphaSlider
-        ];
+        const sliders = {
+            hue: this.elements.hueSlider,
+            saturation: this.elements.saturationSlider,
+            lightness: this.elements.lightnessSlider,
+            alpha: this.elements.alphaSlider
+        };
 
-        sliders.forEach(slider => {
-            if (slider) {
-                ['input', 'change'].forEach(event => {
-                    slider.addEventListener(event, () => this.updateFromSliders());
+        Object.entries(sliders).forEach(([type, slider]) => {
+            slider.addEventListener('input', () => {
+                this.updateFromSliders();
                 });
-            }
         });
 
         // Copy buttons
-        document.querySelectorAll('.copy-btn').forEach(btn => {
+        document.querySelectorAll('.cp-copy-btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 const input = document.getElementById(btn.dataset.clipboard);
-                if (!input) return;
-                
                 input.select();
                 document.execCommand('copy');
                 
-                const tooltip = btn.querySelector('.tooltip');
+                const tooltip = btn.querySelector('.cp-tooltip');
                 if (tooltip) {
+                    const originalText = tooltip.textContent;
                     tooltip.textContent = 'Copied!';
                     setTimeout(() => {
-                        tooltip.textContent = 'Copy';
-                    }, 1500);
+                        tooltip.textContent = originalText;
+                    }, 1000);
                 }
+                
+                showToast('Color value copied to clipboard');
             });
         });
 
         // Save color button
-        if (this.elements.saveColorBtn) {
             this.elements.saveColorBtn.addEventListener('click', () => {
-                const currentColor = this.elements.colorPicker.value;
-                if (currentColor) {
-                    this.saveColor(currentColor);
-                    showToast('Color saved!', 'info');
-                }
+            const color = this.elements.colorPicker.value;
+            this.saveColor(color);
             });
-        }
 
         // Harmony and saved color clicks using event delegation
         document.addEventListener('click', (e) => {
-            const colorElement = e.target.closest('.harmony-color, .saved-color');
+            const colorElement = e.target.closest('.cp-harmony-color, .cp-saved-color');
             if (colorElement) {
                 const color = colorElement.dataset.color;
                 if (color) {
-                    const rgb = this.hexToRgb(color);
-                    if (!rgb) return;
-                    
-                    const hsl = this.rgbToHsl(rgb.r, rgb.g, rgb.b);
-                    
-                    // Update sliders
-                    this.elements.hueSlider.value = Math.round(hsl.h);
-                    this.elements.saturationSlider.value = Math.round(hsl.s);
-                    this.elements.lightnessSlider.value = Math.round(hsl.l);
-                    
-                    // Update display
-                    this.updateFromSliders();
+                    this.updateColor(color);
+                    this.elements.colorPicker.value = color;
                 }
             }
         });
     }
 
     updateColor(color) {
-        if (!color || !this.elements.colorPicker) return;
+        // Update preview
+        this.elements.colorPreview.style.backgroundColor = color;
 
+        // Update values
+        this.elements.hexValue.value = color.toUpperCase();
+
+        // Convert to RGB
         const rgb = this.hexToRgb(color);
-        if (!rgb) {
-            showToast('Invalid color format', 'error');
-            return;
-        }
-
-        const hsl = this.rgbToHsl(rgb.r, rgb.g, rgb.b);
-        if (!hsl) return;
+        if (!rgb) return;
         
-        // Update color picker and sliders
-        this.elements.colorPicker.value = color;
+        this.elements.rgbValue.value = `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`;
+        
+        // Convert to HSL
+        const hsl = this.rgbToHsl(rgb.r, rgb.g, rgb.b);
+        this.elements.hslValue.value = `hsl(${Math.round(hsl.h)}, ${Math.round(hsl.s)}%, ${Math.round(hsl.l)}%)`;
+        
+        // Update sliders
         this.elements.hueSlider.value = Math.round(hsl.h);
         this.elements.saturationSlider.value = Math.round(hsl.s);
         this.elements.lightnessSlider.value = Math.round(hsl.l);
         
-        // Preserve current alpha value
-        const currentAlpha = parseInt(this.elements.alphaSlider.value) || 100;
-        this.elements.alphaSlider.value = currentAlpha;
+        // Update value displays
+        this.updateValueDisplays(hsl.h, hsl.s, hsl.l, 100);
         
-        // Update all displays
-        this.updateFromSliders();
-        
-        // Dispatch change event
-        const event = new Event('change');
-        this.elements.colorPicker.dispatchEvent(event);
+        // Update harmonies
+        this.updateHarmonies(hsl);
     }
 
     updateFromSliders() {
-        if (!this.elements.hueSlider || !this.elements.saturationSlider || 
-            !this.elements.lightnessSlider || !this.elements.alphaSlider) {
-            console.error('ColorPicker: Missing slider elements');
-            return;
-        }
-
         const h = parseInt(this.elements.hueSlider.value);
         const s = parseInt(this.elements.saturationSlider.value);
         const l = parseInt(this.elements.lightnessSlider.value);
         const a = parseInt(this.elements.alphaSlider.value);
 
-        console.log('ColorPicker: Updating from sliders:', { h, s, l, a });
-
+        // Convert HSL to RGB
         const rgb = this.hslToRgb(h, s, l);
-        if (!rgb) {
-            console.error('ColorPicker: Failed to convert HSL to RGB');
-            return;
-        }
-
         const hex = this.rgbToHex(rgb.r, rgb.g, rgb.b);
 
-        // Update color values with alpha
-        if (this.elements.hexValue) {
-            this.elements.hexValue.value = hex;
-        }
-        if (this.elements.rgbValue) {
-            this.elements.rgbValue.value = a < 100 
-                ? `rgba(${rgb.r}, ${rgb.g}, ${rgb.b}, ${(a/100).toFixed(2)})`
-                : `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`;
-        }
-        if (this.elements.hslValue) {
-            this.elements.hslValue.value = a < 100
-                ? `hsla(${h}, ${s}%, ${l}%, ${(a/100).toFixed(2)})`
-                : `hsl(${h}, ${s}%, ${l}%)`;
-        }
-
-        // Update preview with alpha
-        if (this.elements.colorPreview) {
-            // Create a semi-transparent background to show transparency
-            const backgroundColor = `hsla(${h}, ${s}%, ${l}%, ${a/100})`;
-            this.elements.colorPreview.style.backgroundColor = backgroundColor;
-        }
-
-        // Update color picker (note: HTML color input doesn't support alpha)
-        if (this.elements.colorPicker) {
+        // Update color picker and preview
             this.elements.colorPicker.value = hex;
-        }
+        this.elements.colorPreview.style.backgroundColor = hex;
+        
+        // Update text values
+        this.elements.hexValue.value = hex.toUpperCase();
+        this.elements.rgbValue.value = `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`;
+        this.elements.hslValue.value = `hsl(${h}, ${s}%, ${l}%)`;
 
         // Update value displays
         this.updateValueDisplays(h, s, l, a);
 
         // Update harmonies
-        this.updateHarmonies({h, s, l});
-
-        // Notify about color change
-        if (this.elements.colorPicker) {
-            const event = new Event('colorchange');
-            this.elements.colorPicker.dispatchEvent(event);
-        }
+        this.updateHarmonies({ h, s, l });
     }
 
     updateValueDisplays(h, s, l, a) {
         const updateDisplay = (slider, value, unit) => {
-            if (slider && slider.nextElementSibling) {
-                slider.nextElementSibling.textContent = `${value}${unit}`;
+            const display = slider.nextElementSibling;
+            if (display && display.classList.contains('cp-value-display')) {
+                display.textContent = value + unit;
             }
         };
 
-        updateDisplay(this.elements.hueSlider, h, '°');
-        updateDisplay(this.elements.saturationSlider, s, '%');
-        updateDisplay(this.elements.lightnessSlider, l, '%');
-        updateDisplay(this.elements.alphaSlider, a, '%');
+        updateDisplay(this.elements.hueSlider, Math.round(h), '°');
+        updateDisplay(this.elements.saturationSlider, Math.round(s), '%');
+        updateDisplay(this.elements.lightnessSlider, Math.round(l), '%');
+        updateDisplay(this.elements.alphaSlider, Math.round(a), '%');
     }
 
     updateHarmonies(hsl) {
         // Complementary
-        const complementary = { h: (hsl.h + 180) % 360, s: hsl.s, l: hsl.l };
-        this.elements.complementaryColors.innerHTML = this.createHarmonySwatches([hsl, complementary]);
+        const complementary = [(hsl.h + 180) % 360];
+        this.elements.complementaryColors.innerHTML = this.createHarmonySwatches(complementary.map(h => ({ h, s: hsl.s, l: hsl.l })));
 
         // Analogous
-        const analogous = [
-            { h: (hsl.h - 30 + 360) % 360, s: hsl.s, l: hsl.l },
-            hsl,
-            { h: (hsl.h + 30) % 360, s: hsl.s, l: hsl.l }
-        ];
-        this.elements.analogousColors.innerHTML = this.createHarmonySwatches(analogous);
+        const analogous = [(hsl.h - 30 + 360) % 360, (hsl.h + 30) % 360];
+        this.elements.analogousColors.innerHTML = this.createHarmonySwatches(analogous.map(h => ({ h, s: hsl.s, l: hsl.l })));
 
         // Triadic
-        const triadic = [
-            hsl,
-            { h: (hsl.h + 120) % 360, s: hsl.s, l: hsl.l },
-            { h: (hsl.h + 240) % 360, s: hsl.s, l: hsl.l }
-        ];
-        this.elements.triadicColors.innerHTML = this.createHarmonySwatches(triadic);
+        const triadic = [(hsl.h + 120) % 360, (hsl.h + 240) % 360];
+        this.elements.triadicColors.innerHTML = this.createHarmonySwatches(triadic.map(h => ({ h, s: hsl.s, l: hsl.l })));
     }
 
     createHarmonySwatches(colors) {
         return colors.map(color => {
             const rgb = this.hslToRgb(color.h, color.s, color.l);
             const hex = this.rgbToHex(rgb.r, rgb.g, rgb.b);
-            return `<div class="harmony-color" style="background-color: ${hex}" title="${hex}" data-color="${hex}"></div>`;
+            return `<div class="cp-harmony-color" style="background-color: ${hex}" title="${hex}" data-color="${hex}"></div>`;
         }).join('');
     }
 
     saveColor(color) {
-        let savedColors = JSON.parse(localStorage.getItem('savedColors') || '[]');
+        const savedColors = JSON.parse(localStorage.getItem('savedColors') || '[]');
         if (!savedColors.includes(color)) {
             savedColors.push(color);
             localStorage.setItem('savedColors', JSON.stringify(savedColors));
             this.loadSavedColors();
+            showToast('Color saved to palette');
         }
     }
 
     loadSavedColors() {
         const savedColors = JSON.parse(localStorage.getItem('savedColors') || '[]');
         this.elements.savedColors.innerHTML = savedColors.map(color => 
-            `<div class="saved-color" style="background-color: ${color}" title="${color}" data-color="${color}"></div>`
+            `<div class="cp-saved-color" style="background-color: ${color}" title="${color}" data-color="${color}"></div>`
         ).join('');
     }
 
