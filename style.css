@@ -98,8 +98,8 @@ body {
 }
 
 .container {
-    width: 90%;
-    max-width: 1200px;
+    width: 100%;
+    max-width: 1300px;
     margin: 0 auto;
     /* padding: 0 1rem; */
 }
@@ -183,7 +183,7 @@ a:hover {
 }
 
 .logo-text {
-    background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-color-dark) 100%);
+    background:var(--accent-color-dark);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -329,7 +329,7 @@ a:hover {
     z-index: 1001;
     position: absolute;
     right: 1.2rem;
-    top: 50%;
+    top: 45%;
     transform: translateY(-50%);
     background-color: transparent;
     border-radius: 6px;
@@ -1015,7 +1015,7 @@ main {
     #tools-grid {
         grid-template-columns: repeat(3, 1fr); /* 3 cards per row on medium screens */
     }
-    h1 { font-size: 2.2rem; }
+    h1 { font-size: 2rem; }
     h2 { font-size: 1.8rem; }
     #hero h2 { font-size: 2rem; }
     main { padding-top: 65px; } /* Adjust if header height changes */
@@ -1031,7 +1031,7 @@ main {
 
     .tool-card {
         padding: 0.75rem;
-        margin: 0.4rem;
+        /* margin: 0.4rem; */
     }
 
     .tool-card-content {
@@ -1099,7 +1099,7 @@ main {
     }
 
     .tool-card {
-        padding: 0.5rem;
+        padding: 0.7rem;
     }
 
     .tool-card-content {
@@ -1227,7 +1227,7 @@ main {
     z-index: 1001;
     position: absolute;
     right: 1.2rem;
-    top: 50%;
+    top: 45%;
     transform: translateY(-50%);
     background-color: transparent;
     border-radius: 6px;

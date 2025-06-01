@@ -14,6 +14,77 @@
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://quicktoolshub.netlify.app/">
 
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "QuickTools Hub",
+      "description": "A comprehensive suite of free online tools for productivity, file conversion, and everyday tasks.",
+      "applicationCategory": "Utility",
+      "operatingSystem": "Any",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD",
+        "itemOffered": {
+          "@type": "SoftwareApplication",
+          "name": "QuickTools Hub",
+          "operatingSystem": "Any",
+          "applicationCategory": "Utility"
+        }
+      },
+      "featureList": [
+        {
+          "@type": "HowTo",
+          "name": "QR Code Generator",
+          "description": "Generate QR codes from text or URLs quickly and easily.",
+          "step": [
+            {
+              "@type": "HowToStep",
+              "text": "Enter your text or URL",
+              "image": "https://quicktoolshub.netlify.app/assets/qr-generator.png"
+            },
+            {
+              "@type": "HowToStep",
+              "text": "Generate QR code instantly",
+              "image": "https://quicktoolshub.netlify.app/assets/qr-generated.png"
+            }
+          ]
+        },
+        {
+          "@type": "HowTo",
+          "name": "Image Converter",
+          "description": "Convert images between JPG, PNG, and WEBP formats.",
+          "step": [
+            {
+              "@type": "HowToStep",
+              "text": "Upload your image",
+              "image": "https://quicktoolshub.netlify.app/assets/image-uploader.png"
+            },
+            {
+              "@type": "HowToStep",
+              "text": "Select output format",
+              "image": "https://quicktoolshub.netlify.app/assets/image-formats.png"
+            }
+          ]
+        }
+      ]
+    }
+    </script>
+
+    <!-- Enhanced Meta Tags -->
+    <meta name="application-name" content="QuickTools Hub">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="QuickTools Hub">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#ffffff">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/assets/ms-icon-144x144.png">
+    <meta name="msapplication-config" content="/assets/browserconfig.xml">
+    <link rel="manifest" href="/assets/manifest.json">
+
     <!-- Open Graph Meta -->
     <meta property="og:title" content="QuickTools Hub - Free Online Tools for Everyone">
     <meta property="og:description"
@@ -21,6 +92,10 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://quicktoolshub.netlify.app/">
     <meta property="og:image" content="https://quicktoolshub.netlify.app/assets/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:site_name" content="QuickTools Hub">
+    <meta property="og:locale" content="en_US">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
@@ -28,6 +103,9 @@
     <meta name="twitter:description"
         content="QuickTools Hub offers a suite of 20+ powerful tools including file converters, calculators, and more. Fast, free, and secure!">
     <meta name="twitter:image" content="https://quicktoolshub.netlify.app/assets/og-image.png">
+    <meta name="twitter:image:alt" content="QuickTools Hub logo and main tools">
+    <meta name="twitter:site" content="@quicktoolshub">
+    <meta name="twitter:creator" content="@quicktoolshub">
 
     <title>QuickTools Hub - Free Online Tools for Everyone | Powerful, Easy-to-Use Utilities for Daily Tasks</title>
 
@@ -242,7 +320,7 @@
     <!-- QR Code Libraries -->
     <script src="https://cdn.jsdelivr.net/npm/qr-code-styling/lib/qr-code-styling.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-
+    <script src="js/icon-generator.js"></script>
     <!-- Main Script -->
     
 </body>
