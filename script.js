@@ -1131,20 +1131,20 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Stubs for more complex or remaining tools ---
     function initImageCropper() {
         const contentDiv = document.getElementById('image-cropper-content');
+        if (!contentDiv) return;
+
         contentDiv.innerHTML = `
-            <p><strong>Image Cropper (Basic Concept)</strong></p>
-            <div class="form-group">
-                <label for="crop-file">Upload Image:</label>
-                <input type="file" id="crop-file" accept="image/*">
+            <div class="file-input-section">
+                <input type="file" id="cropperFileInput" accept="image/*">
             </div>
-            <canvas id="crop-canvas" style="border:1px solid #ccc; max-width:100%; display:none;"></canvas>
-            <div id="crop-download-container" style="text-align:center; margin-top:1rem;"></div>
-            <p><em>A full interactive image cropper requires significant canvas event handling (mousedown, mousemove, mouseup for selection box) which is complex for this scope. This is a placeholder.</em></p>`;
-        
-        const fileInput = document.getElementById('crop-file');
-        const canvas = document.getElementById('crop-canvas');
+            <canvas id="cropperCanvas" style="display:none;"></canvas>
+            <div id="cropperDownloadContainer"></div>
+        `;
+
+        const fileInput = document.getElementById('cropperFileInput');
+        const canvas = document.getElementById('cropperCanvas');
         const ctx = canvas.getContext('2d');
-        const downloadContainer = document.getElementById('crop-download-container');
+        const downloadContainer = document.getElementById('cropperDownloadContainer');
 
         fileInput.addEventListener('change', e => {
             const file = e.target.files[0];
@@ -1171,13 +1171,8 @@ document.addEventListener('DOMContentLoaded', () => {
             reader.readAsDataURL(file);
         });
     }
-    function initVideoConverter() {
-        const contentDiv = document.getElementById('video-converter-content');
-        contentDiv.innerHTML = `<p><strong>Video Converter Limitations</strong></p>
-                                <p>Direct video file format conversion (e.g., MP4 to WebM) in the browser is extremely complex and typically requires WebAssembly (WASM) ports of libraries like FFmpeg. This is beyond browser-native capabilities.</p>
-                                <p>What is possible: Recording video from webcam/screen (often to WebM or MP4 depending on browser via <code>MediaRecorder</code> API).</p>
-                                <p><em>This tool is a placeholder due to these constraints.</em></p>`;
-    }
+
+    // 14. Audio Converter
     function initAudioConverter() {
         const contentDiv = document.getElementById('audio-converter-content');
         contentDiv.innerHTML = `
@@ -1261,12 +1256,16 @@ document.addEventListener('DOMContentLoaded', () => {
             return new Blob([view], { type: 'audio/wav' });
         }
     }
+
+    // 15. Audio Trimmer
     function initAudioTrimmer() {
         const contentDiv = document.getElementById('audio-trimmer-content');
         contentDiv.innerHTML = `<p><strong>Audio Trimmer (Concept)</strong></p>
                                 <p>Upload audio, decode with Web Audio API, set start/end times (e.g., via input fields or a visual waveform - complex), create new AudioBuffer with the slice, then encode to WAV.</p>
                                 <p><em>This involves detailed Web Audio API manipulation and is a placeholder.</em></p>`;
     }
+
+    // 16. Unit Converter
     function initUnitConverter() {
         const contentDiv = document.getElementById('unit-converter-content');
         contentDiv.innerHTML = `
@@ -1365,20 +1364,19 @@ document.addEventListener('DOMContentLoaded', () => {
         initImageConverterOrCompressor('image-converter', false); // 3
         initImageConverterOrCompressor('image-compressor', true); // 4
         initImageCropper();         // 5 (Basic stub)
-        initVideoConverter();       // 6 (Placeholder)
-        initAudioConverter();       // 7 (MP3 to WAV implemented)
-        initAudioTrimmer();         // 8 (Placeholder)
-        initAgeCalculator();        // 9
-        initEmiCalculator();        // 10
-        initSipCalculator();        // 11
-        initWordCounter();          // 12
-        initColorPicker();          // 14
-        initTextToSpeech();         // 15
-        initSpeechToText();         // 16
-        initJsonFormatter();        // 17
-        initUnitConverter();        // 18
-        initBmiCalculator();        // 19
-        initTimerStopwatch();       // 20
+        initAudioConverter();       // 6 (MP3 to WAV implemented)
+        initAudioTrimmer();         // 7 (Placeholder)
+        initAgeCalculator();        // 8
+        initEmiCalculator();        // 9
+        initSipCalculator();        // 10
+        initWordCounter();          // 11
+        initColorPicker();          // 12
+        initTextToSpeech();         // 13
+        initSpeechToText();         // 14
+        initJsonFormatter();        // 15
+        initUnitConverter();        // 16
+        initBmiCalculator();        // 17
+        initTimerStopwatch();       // 18
     }
 
     initAllTools();

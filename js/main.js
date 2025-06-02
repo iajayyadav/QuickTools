@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const tools = [
         // Most used document & text tools
         { id: 'qr-generator', name: 'QR Code Generator', description: 'Generate QR codes from text or URLs.', icon: '<i class="fas fa-qrcode"></i>' },
+        { id: 'lorem-ipsum', name: 'Lorem Ipsum Generator', description: 'Generate custom Lorem Ipsum text.', icon: '<i class="fas fa-align-left"></i>' },
         { id: 'barcode-generator', name: 'Barcode Generator', description: 'Create barcodes for products, ISBN, UPC, EAN-13, Code 128, and more.', icon: '<i class="fas fa-barcode"></i>', externalUrl: 'https://qrcodegeneratorpro.netlify.app/barcode' },
         
         { id: 'word-counter', name: 'Word Counter', description: 'Count words, characters, reading time.', icon: '<i class="fas fa-font"></i>' },
@@ -31,11 +32,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         { id: 'image-compressor', name: 'Image Compressor', description: 'Reduce image file size (JPG/WEBP).', icon: '<i class="fas fa-compress-arrows-alt"></i>' },
         { id: 'image-metadata-remover', name: 'Image Metadata Remover', description: 'Remove EXIF data and preview image.', icon: '<i class="fas fa-user-shield"></i>' },
         { id: 'image-cropper', name: 'Image Cropper', description: 'Crop images (basic implementation).', icon: '<i class="fas fa-crop-alt"></i>' },
-        { id: 'video-converter', name: 'Video Converter', description: 'Browser limitations apply. Can record.', icon: '<i class="fas fa-video"></i>' },
         { id: 'audio-converter', name: 'Audio Converter', description: 'Convert audio (e.g., MP3 to WAV).', icon: '<i class="fas fa-file-audio"></i>' },
         { id: 'audio-trimmer', name: 'Audio Trimmer', description: 'Trim audio clips (WAV output).', icon: '<i class="fas fa-cut"></i>' },
         
         // Calculators & converters
+        { id: 'scientific-calculator', name: 'Scientific Calculator', description: 'Advanced calculator with scientific functions.', icon: '<i class="fas fa-calculator"></i>' },
         { id: 'unit-converter', name: 'Unit Converter', description: 'Convert length, weight, temperature.', icon: '<i class="fas fa-ruler-combined"></i>' },
         { id: 'gratuity-calculator', name: 'Gratuity Calculator', description: 'Calculate tips and split bills easily.', icon: '<i class="fas fa-hand-holding-usd"></i>' },
         { id: 'emi-calculator', name: 'EMI Calculator', description: 'Calculate Equated Monthly Installments.', icon: '<i class="fas fa-calculator"></i>' },
@@ -49,6 +50,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         // Security & utility tools
         { id: 'password-generator', name: 'Password Generator', description: 'Create strong, secure passwords.', icon: '<i class="fas fa-key"></i>' },
         { id: 'base64-coder', name: 'Base64 Encoder/Decoder', description: 'Encode to or decode from Base64.', icon: '<i class="fas fa-exchange-alt"></i>' },
+        { id: 'file-hash', name: 'File Hash Calculator', description: 'Calculate MD5, SHA-1, SHA-256 hashes.', icon: '<i class="fas fa-fingerprint"></i>' },
         { id: 'color-picker', name: 'Color Picker', description: 'Pick colors and get HEX, RGB, HSL values.', icon: '<i class="fas fa-palette"></i>' },
         { id: 'color-contrast-checker', name: 'Color Contrast Checker', description: 'Check color contrast for accessibility (WCAG).', icon: '<i class="fas fa-adjust"></i>' },
         { id: 'timer-stopwatch', name: 'Timer/Stopwatch', description: 'Simple timer and stopwatch.', icon: '<i class="fas fa-stopwatch"></i>' },
@@ -58,6 +60,49 @@ document.addEventListener('DOMContentLoaded', async () => {
         { id: 'speech-to-text', name: 'Speech to Text', description: 'Convert spoken words into text.', icon: '<i class="fas fa-microphone"></i>' },
         { id: 'advanced-qr-generator', name: 'Advanced QR Code Generator', description: 'Create QR codes with custom logos, colors, and advanced styling options.', icon: '<i class="fas fa-qrcode"></i>', externalUrl: 'https://qrcodegeneratorpro.netlify.app/' }
     ];
+
+    // URL handling utilities
+    function getToolSlug(toolId) {
+        return tools.find(t => t.id === toolId)?.name
+            .toLowerCase()
+            .replace(/[^a-z0-9]+/g, '-')
+            .replace(/-+/g, '-')
+            .replace(/^-|-$/g, '');
+    }
+
+    function getToolIdFromSlug(slug) {
+        return tools.find(t => getToolSlug(t.id) === slug)?.id;
+    }
+
+    function updateMetaTags(tool) {
+        // Update title
+        document.title = tool ? 
+            `${tool.name} - Free Online Tool | QuickTools Hub` : 
+            'QuickTools Hub - Your One-Stop Utility Platform';
+
+        // Update meta description
+        let metaDesc = document.querySelector('meta[name="description"]');
+        if (!metaDesc) {
+            metaDesc = document.createElement('meta');
+            metaDesc.setAttribute('name', 'description');
+            document.head.appendChild(metaDesc);
+        }
+        metaDesc.setAttribute('content', tool ? 
+            `Free online ${tool.name.toLowerCase()}. ${tool.description} No installation required. Easy to use web-based tool.` :
+            'Collection of free online tools and utilities. Convert, calculate, generate and more with our easy-to-use web-based tools.');
+
+        // Update canonical URL
+        let canonical = document.querySelector('link[rel="canonical"]');
+        if (!canonical) {
+            canonical = document.createElement('link');
+            canonical.setAttribute('rel', 'canonical');
+            document.head.appendChild(canonical);
+        }
+        const baseUrl = window.location.origin;
+        canonical.setAttribute('href', tool ? 
+            `${baseUrl}/tool/${getToolSlug(tool.id)}` :
+            baseUrl);
+    }
 
     // --- Navigation and View Management ---
     async function showView(viewId) {
@@ -79,7 +124,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             heroSection.style.display = 'flex';
             toolsGridSection.style.display = 'block';
             homeContentContainer.style.display = 'block';
-            document.title = 'QuickTools Hub - Your One-Stop Utility Platform';
+            updateMetaTags();
 
             // Load home content if not already loaded
             if (!homeContentContainer.querySelector('#home-content')) {
@@ -103,10 +148,11 @@ document.addEventListener('DOMContentLoaded', async () => {
                 toolViewContainer.style.display = 'block';
                 targetView.classList.add('active');
                 const tool = tools.find(t => t.id === viewId);
-                document.title = `${tool?.name || 'Tool'} | QuickTools Hub`;
+                updateMetaTags(tool);
                 window.scrollTo(0, 0);
             } else {
                 console.error('Tool view not found:', viewId);
+                window.location.hash = '';
             }
         }
     }
@@ -119,7 +165,19 @@ document.addEventListener('DOMContentLoaded', async () => {
     function handleHashChange() {
         const hash = window.location.hash.substring(1);
         console.log('Hash changed to:', hash);
-        showView(hash || 'home');
+        
+        // Handle SEO-friendly URLs
+        if (hash.startsWith('tool/')) {
+            const slug = hash.substring(5);
+            const toolId = getToolIdFromSlug(slug);
+            if (toolId) {
+                showView(toolId);
+            } else {
+                window.location.hash = '';
+            }
+        } else {
+            showView(hash || 'home');
+        }
     }
     window.addEventListener('hashchange', handleHashChange);
 
@@ -143,7 +201,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 if (tool.externalUrl) {
                     window.open(tool.externalUrl, '_blank');
                 } else {
-                    window.location.hash = tool.id;
+                    window.location.hash = `tool/${getToolSlug(tool.id)}`;
                 }
             });
             

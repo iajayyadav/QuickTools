@@ -8,107 +8,203 @@
         <priority>1.0</priority>
     </url>
 
-    <!-- Main Pages -->
+    <!-- Document & Text Tools -->
     <url>
-        <loc>https://quicktoolshub.netlify.app/pages/about.html</loc>
+        <loc>https://quicktoolshub.netlify.app/tool/qr-code-generator</loc>
         <lastmod>2024-03-21</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://quicktoolshub.netlify.app/pages/contact.html</loc>
+        <loc>https://quicktoolshub.netlify.app/tool/lorem-ipsum-generator</loc>
         <lastmod>2024-03-21</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://quicktoolshub.netlify.app/pages/faq.html</loc>
-        <lastmod>2024-03-21</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- Legal Pages -->
-    <url>
-        <loc>https://quicktoolshub.netlify.app/pages/privacy.html</loc>
-        <lastmod>2024-03-21</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.6</priority>
-    </url>
-    <url>
-        <loc>https://quicktoolshub.netlify.app/pages/terms.html</loc>
-        <lastmod>2024-03-21</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.6</priority>
-    </url>
-
-    <!-- Calculator Tools -->
-    <url>
-        <loc>https://quicktoolshub.netlify.app/#age-calculator</loc>
+        <loc>https://quicktoolshub.netlify.app/tool/word-counter</loc>
         <lastmod>2024-03-21</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://quicktoolshub.netlify.app/#bmi-calculator</loc>
+        <loc>https://quicktoolshub.netlify.app/tool/text-case-converter</loc>
         <lastmod>2024-03-21</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://quicktoolshub.netlify.app/#emi-calculator</loc>
+        <loc>https://quicktoolshub.netlify.app/tool/json-formatter</loc>
         <lastmod>2024-03-21</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://quicktoolshub.netlify.app/#sip-calculator</loc>
+        <loc>https://quicktoolshub.netlify.app/tool/csv-to-json</loc>
+        <lastmod>2024-03-21</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://quicktoolshub.netlify.app/tool/markdown-editor</loc>
+        <lastmod>2024-03-21</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://quicktoolshub.netlify.app/tool/regex-tester</loc>
         <lastmod>2024-03-21</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
 
-    <!-- Image Tools -->
+    <!-- Image & Media Tools -->
     <url>
-        <loc>https://quicktoolshub.netlify.app/#image-converter</loc>
+        <loc>https://quicktoolshub.netlify.app/tool/image-converter</loc>
         <lastmod>2024-03-21</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://quicktoolshub.netlify.app/#image-compressor</loc>
+        <loc>https://quicktoolshub.netlify.app/tool/image-compressor</loc>
         <lastmod>2024-03-21</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://quicktoolshub.netlify.app/#image-cropper</loc>
+        <loc>https://quicktoolshub.netlify.app/tool/image-metadata-remover</loc>
         <lastmod>2024-03-21</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://quicktoolshub.netlify.app/#qr-generator</loc>
+        <loc>https://quicktoolshub.netlify.app/tool/image-cropper</loc>
+        <lastmod>2024-03-21</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://quicktoolshub.netlify.app/tool/audio-converter</loc>
+        <lastmod>2024-03-21</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://quicktoolshub.netlify.app/tool/audio-trimmer</loc>
         <lastmod>2024-03-21</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
 
-    <!-- Media Tools -->
+    <!-- Calculators & Converters -->
     <url>
-        <loc>https://quicktoolshub.netlify.app/#video-converter</loc>
+        <loc>https://quicktoolshub.netlify.app/tool/scientific-calculator</loc>
         <lastmod>2024-03-21</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://quicktoolshub.netlify.app/#audio-converter</loc>
+        <loc>https://quicktoolshub.netlify.app/tool/unit-converter</loc>
         <lastmod>2024-03-21</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
-        <loc>https://quicktoolshub.netlify.app/#audio-trimmer</loc>
+        <loc>https://quicktoolshub.netlify.app/tool/gratuity-calculator</loc>
+        <lastmod>2024-03-21</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://quicktoolshub.netlify.app/tool/emi-calculator</loc>
+        <lastmod>2024-03-21</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://quicktoolshub.netlify.app/tool/sip-calculator</loc>
+        <lastmod>2024-03-21</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://quicktoolshub.netlify.app/tool/age-calculator</loc>
+        <lastmod>2024-03-21</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://quicktoolshub.netlify.app/tool/bmi-calculator</loc>
+        <lastmod>2024-03-21</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://quicktoolshub.netlify.app/tool/calorie-calculator</loc>
+        <lastmod>2024-03-21</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://quicktoolshub.netlify.app/tool/gst-calculator</loc>
+        <lastmod>2024-03-21</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://quicktoolshub.netlify.app/tool/freelance-calculator</loc>
+        <lastmod>2024-03-21</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Security & Utility Tools -->
+    <url>
+        <loc>https://quicktoolshub.netlify.app/tool/password-generator</loc>
+        <lastmod>2024-03-21</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://quicktoolshub.netlify.app/tool/base64-encoder-decoder</loc>
+        <lastmod>2024-03-21</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://quicktoolshub.netlify.app/tool/file-hash-calculator</loc>
+        <lastmod>2024-03-21</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://quicktoolshub.netlify.app/tool/color-picker</loc>
+        <lastmod>2024-03-21</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://quicktoolshub.netlify.app/tool/color-contrast-checker</loc>
+        <lastmod>2024-03-21</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://quicktoolshub.netlify.app/tool/timer-stopwatch</loc>
+        <lastmod>2024-03-21</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+
+    <!-- Speech Tools -->
+    <url>
+        <loc>https://quicktoolshub.netlify.app/tool/text-to-speech</loc>
+        <lastmod>2024-03-21</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    <url>
+        <loc>https://quicktoolshub.netlify.app/tool/speech-to-text</loc>
         <lastmod>2024-03-21</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
