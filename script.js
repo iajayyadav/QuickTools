@@ -46,19 +46,19 @@ document.addEventListener('DOMContentLoaded', () => {
             document.title = 'QuickTools Hub - Your One-Stop Utility Platform';
         } else {
             // Show specific tool
-            const targetView = document.getElementById(viewId);
-            if (targetView) {
+        const targetView = document.getElementById(viewId);
+        if (targetView) {
                 toolViewContainer.style.display = 'block';
-                targetView.classList.add('active');
-                const tool = tools.find(t => t.id === viewId);
-                document.title = `${tool?.name || 'Tool'} | QuickTools Hub`;
-                window.scrollTo(0, 0);
+            targetView.classList.add('active');
+            const tool = tools.find(t => t.id === viewId);
+            document.title = `${tool?.name || 'Tool'} | QuickTools Hub`;
+            window.scrollTo(0, 0);
             }
         }
 
         // Update navigation active state
         document.querySelectorAll('#main-nav .nav-link').forEach(link => link.classList.remove('active'));
-        const activeNavLink = mainNav.querySelector(`a[href="/tool/${viewId || ''}"]`);
+        const activeNavLink = mainNav.querySelector(`a[href="#${viewId || 'home'}"]`);
         if (activeNavLink) activeNavLink.classList.add('active');
     }
     
@@ -68,21 +68,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     homeLink.addEventListener('click', (e) => {
         e.preventDefault();
-        history.pushState(null, '', '/');
+        history.pushState(null, '', '#home');
         showView('home');
     });
 
-    function handlePathChange() {
-        const path = window.location.pathname;
-        const toolId = path.match(/\/tool\/([^/]+)/)?.[1] || '';
-        showView(toolId || 'home');
+    function handleHashChange() {
+        const hash = window.location.hash.substring(1);
+        showView(hash || 'home');
     }
-
-    // Handle browser back/forward buttons
-    window.addEventListener('popstate', handlePathChange);
-
-    // Initial load
-    handlePathChange();
+    window.addEventListener('hashchange', handleHashChange);
+    
 
     // --- Populate Tool Cards and Tool Views ---
     tools.forEach(tool => {
@@ -98,9 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const openButton = card.querySelector('.open-tool-btn');
         openButton.addEventListener('click', (e) => {
             e.stopPropagation(); // Prevent card click event
-            e.preventDefault();
-            history.pushState(null, '', `/tool/${tool.id}`);
-            showView(tool.id);
+            window.location.hash = tool.id;
         });
         
         toolsGrid.appendChild(card);
@@ -116,8 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
         toolView.querySelector('.back-to-home').addEventListener('click', (e) => {
             e.preventDefault();
-            history.pushState(null, '', '/');
-            showView('home');
+            window.location.hash = 'home';
         });
         toolViewContainer.appendChild(toolView);
     });
@@ -1388,6 +1380,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     initAllTools();
+    handleHashChange(); // Initial page load based on hash
 
     // Fade-in on scroll for tool cards
     const observer = new IntersectionObserver((entries) => {
